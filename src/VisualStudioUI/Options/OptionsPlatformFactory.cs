@@ -46,6 +46,6 @@ namespace Microsoft.VisualStudioUI.Options
         public abstract OptionPlatform CreateProgressIndicatorOptionPlatform(ProgressIndicatorOption progressIndicatorOption);
         public abstract OptionPlatform CreateCreateDirectoryOptionlatform(DirectoryOption directoryOption);
         public abstract OptionPlatform CreateCreateProjectFileOptionlatform(ProjectFileOption projectFileOption);
-
+        public abstract OptionPlatform CreateEnvironmentVariableOptionPlatform(EnvironmentVariableOption variableOption);
     }
 }
