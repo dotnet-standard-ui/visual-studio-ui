@@ -12,12 +12,12 @@ namespace Microsoft.VisualStudioUI.Options
         public string AddToolTip = string.Empty;
         public string RemoveToolTip = string.Empty;
 
-        public ViewModelProperty<ImmutableArray<string>> Model { get; }
+        public ViewModelProperty<ImmutableArray<EnviroumentVariableItem>> Property { get; }
 
-        public EnvironmentVariableOption(ViewModelProperty<ImmutableArray<string>> model)
+        public EnvironmentVariableOption(ViewModelProperty<ImmutableArray<EnviroumentVariableItem>> model)
         {
-            Model = model;
-            Model.Bind();
+            Property = model;
+            Property.Bind();
             Platform = OptionFactoryPlatform.Instance.CreateEnvironmentVariableOptionPlatform(this);
         }
     }

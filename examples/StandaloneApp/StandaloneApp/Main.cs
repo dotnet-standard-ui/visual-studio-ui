@@ -31,6 +31,14 @@ namespace Microsoft.VisualStudioUI.StandaloneApp
                 Label = "Test enable"
             };
 
+            var variablesTable = new EnvironmentVariableOption(new ViewModelProperty<ImmutableArray<EnviroumentVariableItem>>("")) {
+                AddButtonTitle = "Add",
+                RemoveButtonTitle = "Remove",
+                ValuesColumnTitle = "Values",
+                VariablesColumnTitle = "Variables"
+            };
+            card.AddOption(variablesTable);
+
             var dependOn = new CheckBoxOption(BoolProp(false)) { ButtonLabel = "enable" };
 
             var warning = new ViewModelProperty<Message?>("", new Message("warning", MessageSeverity.Warning));

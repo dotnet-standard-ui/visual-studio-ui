@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-
 using AppKit;
 using Foundation;
 using Microsoft.VisualStudioUI.Options;
+using Microsoft.VisualStudioUI.Options.Models;
 
 namespace Microsoft.VisualStudioUI.VSMac.Options
 {
@@ -13,34 +13,37 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
         internal const string VariablesColumnId = "VariablesColumnId";
         internal const string ValuesColumnId = "ValuesColumnId";
 
-        internal List<string> Variables;
-        internal List<string> Values;
+        internal List<EnviroumentVariableItem> Items;
+
         private NSView _optionView;
         private NSTableView _tableView;
         private NSButton _addButton, _removeButton;
 
-        private readonly List<string> _stringList = new List<string>();
-
         public EnvironmentVariableOptionVSMac(EnvironmentVariableOption option) : base(option)
         {
-            Variables = new List<string>();
-            Values = new List<string>();
+            Items = new List<EnviroumentVariableItem >();
         }
 
-        private void UpdateStringListFromModel()
+        private void UpdateListFromModel()
         {
-            _stringList.Clear();
-            foreach (string item in EnvironmentVariableOption.Property.Value)
+            Items.Clear();
+            if(EnvironmentVariableOption.Property.Value == null)
             {
-                _stringList.Add(item);
+                return;
+            }
+            foreach (var item in EnvironmentVariableOption.Property.Value)
+            {
+                Items.Add(item);
             }
         }
 
-        private void UpdateModelFromStringList()
+        private void UpdateModelFromList()
         {
-            EnvironmentVariableOption.Property.PropertyChanged -= OnStringsListChanged;
-            EnvironmentVariableOption.Property.Value = _stringList.ToImmutableArray();
-            EnvironmentVariableOption.Property.PropertyChanged += OnStringsListChanged;
+            EnvironmentVariableOption.Property.PropertyChanged -= OnListChanged;
+
+            EnvironmentVariableOption.Property.Value = Items.ToImmutableArray();
+
+            EnvironmentVariableOption.Property.PropertyChanged += OnListChanged;
         }
 
         public override NSView View
@@ -69,7 +72,6 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
             _tableView = new NSTableView()
             {
-                HeaderView = null,
                 Source = new VariableSource(this),
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
@@ -95,8 +97,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 ToolTip = EnvironmentVariableOption.AddToolTip,
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
+            _addButton.SizeToFit();
             _addButton.Activated += OnAddClicked;
-
             _removeButton = new NSButton
             {
                 BezelStyle = NSBezelStyle.RoundRect,
@@ -104,6 +106,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 ToolTip = EnvironmentVariableOption.RemoveToolTip,
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
+            _removeButton.SizeToFit();
             _removeButton.Activated += OnRemoveClicked;
             _optionView.AddSubview(_addButton);
             _optionView.AddSubview(_removeButton);
@@ -125,13 +128,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 left.WidthAnchor.ConstraintEqualToConstant(205).Active = true;
                 left.BottomAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor).Active = true;
             }
-
-            _addButton.WidthAnchor.ConstraintEqualToConstant(30).Active = true;
-            _addButton.HeightAnchor.ConstraintEqualToConstant(25).Active = true;
-            _removeButton.WidthAnchor.ConstraintEqualToConstant(30).Active = true;
-            _removeButton.HeightAnchor.ConstraintEqualToConstant(25).Active = true;
-            scrolledView.HeightAnchor.ConstraintEqualToConstant(200).Active = true;
-            scrolledView.WidthAnchor.ConstraintEqualToConstant(374).Active = true;
+            scrolledView.HeightAnchor.ConstraintEqualToConstant(200f).Active = true;
+            scrolledView.WidthAnchor.ConstraintEqualToConstant(560f).Active = true;
             _optionView.WidthAnchor.ConstraintEqualToConstant(640f).Active = true;
 
             _addButton.TopAnchor.ConstraintEqualToAnchor(scrolledView.BottomAnchor, 10).Active = true;
@@ -144,9 +142,9 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
           
             scrolledView.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor, 20 + IndentValue()).Active = true;
 
-            EnvironmentVariableOption.Property.PropertyChanged += OnStringsListChanged;
+            EnvironmentVariableOption.Property.PropertyChanged += OnListChanged;
 
-            UpdateStringListFromModel();
+            UpdateListFromModel();
         }
 
         public override void OnEnableChanged(bool enabled)
@@ -167,15 +165,15 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
         }
 
-        private void OnStringsListChanged(object sender, EventArgs e)
+        private void OnListChanged(object sender, EventArgs e)
         {
-            UpdateStringListFromModel();
+            UpdateListFromModel();
 
             _tableView.ReloadData();
 
             TableSelectLastItem();
 
-            _removeButton.Enabled = _stringList.Count > 0;
+            _removeButton.Enabled = Items.Count > 0;
 
         }
 
@@ -189,69 +187,59 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             }
 
             var textField = (NSTextField)(sObject);
-
+            
             int row = (int)textField.Tag;
             string? newText = textField.StringValue;
-            if (string.IsNullOrEmpty(newText) || newText.Equals(_stringList[row]))
+            if (string.IsNullOrEmpty(newText))
             {
                 return;
             }
 
-            string? newValue =  newText;
+            if (textField.Identifier.Equals(VariablesColumnId))
+            {
+               Items[(int)row].Variable = newText;
+            }
+            else if (textField.Identifier.Equals(ValuesColumnId))
+            {
+               Items[(int)row].Value = newText;
+            }
 
-            _stringList[row] = newValue;
-
-            UpdateModelFromStringList();
-            RefreshList();
+            UpdateModelFromList();
+ 
         }
 
         private void OnAddClicked(object sender, EventArgs e)
         {
-            var defalutString = string.Empty;
 
-            try
-            {
-                _stringList.Add(defalutString);
-                UpdateModelFromStringList();
-                RefreshList();
-            }
-            catch
-            {
-                return;
-            }
+            Items.Add(new EnviroumentVariableItem(string.Empty, string.Empty));
+        
+            UpdateModelFromList();
+            RefreshList();
         }
 
         private void OnRemoveClicked(object sender, EventArgs e)
         {
             int selectedRow = (int)_tableView.SelectedRow;
 
-            if (selectedRow < 0 || selectedRow >= _stringList.Count)
+            if (selectedRow < 0 || selectedRow >= Items.Count)
             {
                 return;
             }
             //fix reference bug when selected row in textfield editing state
             NSTableRowView? view = _tableView.GetRowView(selectedRow, false);
             view.Window.MakeFirstResponder(null);
-
-            try
-            {
-                _stringList.RemoveAt(selectedRow);
-                UpdateModelFromStringList();
-                RefreshList();
-            }
-            catch
-            {
-                return;
-            }
+            Items.RemoveAt(selectedRow);
+            UpdateModelFromList();
+            RefreshList();
         }
 
         private void TableSelectLastItem()
         {
-            if (_stringList.Count <= 0)
+            if (Items.Count <= 0)
             {
                 return;
             }
-            int selectRow = _stringList.Count - 1;
+            int selectRow = Items.Count - 1;
 
             _tableView.SelectRow(selectRow, false);
             _tableView.ScrollRowToVisible(selectRow);
@@ -264,7 +252,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
             TableSelectLastItem();
 
-            _removeButton.Enabled = _stringList.Count > 0;
+            _removeButton.Enabled = Items.Count > 0;
 
         }
     }
@@ -281,7 +269,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
         public override NSView GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, nint row)
         {
     
-            var view = (NSTableCellView)tableView.MakeView("cell", this);
+            var view = (NSTableCellView)tableView.MakeView(tableColumn.Identifier, this);
             if (view == null)
             {
                 view = new NSTableCellView
@@ -293,8 +281,9 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                         Bordered = false,
                         DrawsBackground = false,
                         Highlighted = false,
+                        Identifier = tableColumn.Identifier
                     },
-                    Identifier = "cell"
+                    Identifier = tableColumn.Identifier
                 };
 
                 view.AddSubview(view.TextField);
@@ -308,11 +297,11 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
             if (tableColumn.Identifier == EnvironmentVariableOptionVSMac.VariablesColumnId)
             {
-                value = _platform.Variables[(int)row];
+                value = _platform.Items[(int)row].Variable;
             }
             else if(tableColumn.Identifier == EnvironmentVariableOptionVSMac.ValuesColumnId)
             {
-                value = _platform.Values[(int)row];
+                value = _platform.Items[(int)row].Value;
             }
 
             view.TextField.StringValue = value;
@@ -322,7 +311,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
         public override nint GetRowCount(NSTableView tableView)
         {
-            return _platform.Variables.Count;
+            return _platform.Items.Count;
         }
     }
 

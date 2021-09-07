@@ -67,5 +67,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
         public override OptionPlatform CreateCreateProjectFileOptionlatform(ProjectFileOption projectFileOption) =>
             new ProjectFileOptionVSMac(projectFileOption);
 
+        public override OptionPlatform CreateEnvironmentVariableOptionPlatform(EnvironmentVariableOption environmentVariableOption) =>
+            new EnvironmentVariableOptionVSMac(environmentVariableOption);
+
     }
 }
