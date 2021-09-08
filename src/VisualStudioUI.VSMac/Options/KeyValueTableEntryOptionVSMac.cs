@@ -12,8 +12,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
     {
         internal const string KeyColumnId = "FirstColumnId";
         internal const string ValueColumnId = "SecondColumnId";
-
-        internal List<EnviroumentVariableItem> Items;
+        internal List<KeyValueItem> Items;
 
         private NSView _optionView;
         private NSTableView _tableView;
@@ -21,7 +20,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
         public KeyValueTableEntryOptionVSMac(KeyValueTableEntryOption option) : base(option)
         {
-            Items = new List<EnviroumentVariableItem >();
+            Items = new List<KeyValueItem >();
         }
 
         private void UpdateListFromModel()
@@ -217,7 +216,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
         private void OnAddClicked(object sender, EventArgs e)
         {
 
-            Items.Add(new EnviroumentVariableItem(string.Empty, string.Empty));
+            Items.Add(new KeyValueItem(string.Empty, string.Empty));
         
             UpdateModelFromList();
             RefreshList();
@@ -282,13 +281,14 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 {
                     TextField = new NSTextField
                     {
-                        Frame = new CoreGraphics.CGRect(5, 2, tableColumn.Width, 20),
+                        Frame = new CoreGraphics.CGRect(0, 2, tableColumn.Width, 20),
                         Hidden = false,
                         Bordered = false,
-                        DrawsBackground = false,
+                        DrawsBackground = true,
                         Highlighted = false,
                         Identifier = tableColumn.Identifier
                     },
+          
                     Identifier = tableColumn.Identifier
                 };
 

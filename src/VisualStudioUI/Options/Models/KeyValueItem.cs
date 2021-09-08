@@ -1,11 +1,11 @@
 ﻿namespace Microsoft.VisualStudioUI.Options.Models
 {
-    public class EnviroumentVariableItem
+    public class KeyValueItem
     {
         public string Variable { get; set; }
         public string Value { get; set; }
 
-        public EnviroumentVariableItem(string variable, string value)
+        public KeyValueItem(string variable, string value)
         {
             Variable = variable;
             Value = value;
