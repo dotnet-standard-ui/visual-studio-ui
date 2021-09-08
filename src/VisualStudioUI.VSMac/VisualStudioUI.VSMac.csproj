@@ -84,8 +84,8 @@
     <Compile Include="Options\ProgressIndicatorOptionVSMac.cs" />
     <Compile Include="Options\DirectoryOptionVSMac.cs" />
     <Compile Include="Options\ProjectFileOptionVSMac.cs" />
-    <Compile Include="Options\IntentExtrasOptionVSMac.cs" />
     <Compile Include="Options\KeyValueTableEntryOptionVSMac.cs" />
+    <Compile Include="Options\KeyValueTypeTableOptionVSMac.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VisualStudioUI\VisualStudioUI.csproj">

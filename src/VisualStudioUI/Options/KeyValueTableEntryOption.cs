@@ -5,8 +5,8 @@ namespace Microsoft.VisualStudioUI.Options
 {
     public class KeyValueTableEntryOption: Option
     {
-        public string VariablesColumnTitle = string.Empty;
-        public string ValuesColumnTitle = string.Empty;
+        public string KeyColumnTitle = string.Empty;
+        public string ValueColumnTitle = string.Empty;
         public string AddButtonTitle = string.Empty;
         public string RemoveButtonTitle = string.Empty;
         public string AddToolTip = string.Empty;

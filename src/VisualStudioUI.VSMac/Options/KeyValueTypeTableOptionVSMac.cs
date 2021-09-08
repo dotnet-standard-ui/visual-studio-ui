@@ -2,35 +2,35 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using AppKit;
-using Foundation;
 using Microsoft.VisualStudioUI.Options;
 using Microsoft.VisualStudioUI.Options.Models;
 
 namespace Microsoft.VisualStudioUI.VSMac.Options
 {
-    public class KeyValueTableEntryOptionVSMac : OptionVSMac
+    public class KeyValueTypeTableOptionVSMac : OptionVSMac
     {
-        internal const string KeyColumnId = "FirstColumnId";
-        internal const string ValueColumnId = "SecondColumnId";
+        internal const string KeyColumnId = "KeyColumnId";
+        internal const string TypeColumnId = "TypeColumnId";
+        internal const string ValueColumnId = "ValueColumnId";
         internal List<KeyValueItem> Items;
 
         private NSView _optionView;
         private NSTableView _tableView;
-        private NSButton _addButton, _removeButton;
+        private NSButton _addButton, _removeButton, _editButton;
 
-        public KeyValueTableEntryOptionVSMac(KeyValueTableEntryOption option) : base(option)
+        public KeyValueTypeTableOptionVSMac(KeyValueTypeTableOption option) : base(option)
         {
-            Items = new List<KeyValueItem >();
+            Items = new List<KeyValueItem>();
         }
 
         private void UpdateListFromModel()
         {
             Items.Clear();
-            if(KeyValueTableEntryOption.Property.Value == null)
+            if (KeyValueTypeTableOption.Property.Value == null)
             {
                 return;
             }
-            foreach (var item in KeyValueTableEntryOption.Property.Value)
+            foreach (var item in KeyValueTypeTableOption.Property.Value)
             {
                 Items.Add(item);
             }
@@ -38,11 +38,9 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
         private void UpdateModelFromList()
         {
-            KeyValueTableEntryOption.Property.PropertyChanged -= OnListChanged;
-
-            KeyValueTableEntryOption.Property.Value = Items.ToImmutableArray();
-
-            KeyValueTableEntryOption.Property.PropertyChanged += OnListChanged;
+            KeyValueTypeTableOption.Property.PropertyChanged -= OnListChanged;
+            KeyValueTypeTableOption.Property.Value = Items.ToImmutableArray();
+            KeyValueTypeTableOption.Property.PropertyChanged += OnListChanged;
         }
 
         public override NSView View
@@ -58,7 +56,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             }
         }
 
-        public KeyValueTableEntryOption KeyValueTableEntryOption => ((KeyValueTableEntryOption)Option);
+        public KeyValueTypeTableOption KeyValueTypeTableOption => ((KeyValueTypeTableOption)Option);
 
         public IntPtr Handle => throw new NotImplementedException();
 
@@ -71,17 +69,24 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
             _tableView = new NSTableView()
             {
-                Source = new KeyValueTableSource(this),
+                Source = new KeyValueTypeTableSource(this),
                 AllowsColumnReordering = false,
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
 
-            _tableView.AddColumn(new NSTableColumn(KeyColumnId) {
-                Title = KeyValueTableEntryOption.KeyColumnTitle,
-            } );
+            _tableView.AddColumn(new NSTableColumn(KeyColumnId)
+            {
+                Title = KeyValueTypeTableOption.KeyColumnTitle,
+            });
 
-            _tableView.AddColumn(new NSTableColumn(ValueColumnId) {
-                Title = KeyValueTableEntryOption.ValueColumnTitle,              
+            _tableView.AddColumn(new NSTableColumn(TypeColumnId)
+            {
+                Title = KeyValueTypeTableOption.TypeColumnTitle,
+            });
+
+            _tableView.AddColumn(new NSTableColumn(ValueColumnId)
+            {
+                Title = KeyValueTypeTableOption.ValueColumnTitle,
             });
 
             var scrolledView = new NSScrollView()
@@ -98,24 +103,39 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             _addButton = new NSButton
             {
                 BezelStyle = NSBezelStyle.RoundRect,
-                Title = KeyValueTableEntryOption.AddButtonTitle,
-                ToolTip = KeyValueTableEntryOption.AddToolTip,
+                Title = KeyValueTypeTableOption.AddButtonTitle,
+                ToolTip = KeyValueTypeTableOption.AddToolTip,
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
             _addButton.SizeToFit();
             _addButton.Activated += OnAddClicked;
+
             _removeButton = new NSButton
             {
                 BezelStyle = NSBezelStyle.RoundRect,
-                Title = KeyValueTableEntryOption.RemoveButtonTitle,
-                ToolTip = KeyValueTableEntryOption.RemoveToolTip,
+                Title = KeyValueTypeTableOption.RemoveButtonTitle,
+                ToolTip = KeyValueTypeTableOption.RemoveToolTip,
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
             _removeButton.SizeToFit();
             _removeButton.Activated += OnRemoveClicked;
+
+            _editButton = new NSButton
+            {
+                BezelStyle = NSBezelStyle.RoundRect,
+                Title = KeyValueTypeTableOption.EditButtonTitle,
+                ToolTip = KeyValueTypeTableOption.EditToolTip,
+                TranslatesAutoresizingMaskIntoConstraints = false
+            };
+            _editButton.SizeToFit();
+            _editButton.Activated += OnRemoveClicked;
+
             _optionView.AddSubview(_addButton);
             _optionView.AddSubview(_removeButton);
+            _optionView.AddSubview(_editButton);
 
+            _optionView.AddSubview(_addButton);
+            _optionView.AddSubview(_removeButton);
             if (!string.IsNullOrEmpty(Option.Label))
             {
                 var left = new NSTextField();
@@ -141,11 +161,14 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             _addButton.LeadingAnchor.ConstraintEqualToAnchor(scrolledView.LeadingAnchor).Active = true;
             _removeButton.TopAnchor.ConstraintEqualToAnchor(_addButton.TopAnchor).Active = true;
             _removeButton.LeadingAnchor.ConstraintEqualToAnchor(_addButton.TrailingAnchor, 10).Active = true;
+            _editButton.TopAnchor.ConstraintEqualToAnchor(scrolledView.BottomAnchor, 10).Active = true;
+            _editButton.TrailingAnchor.ConstraintEqualToAnchor(scrolledView.TrailingAnchor).Active = true;
 
-            _optionView.BottomAnchor.ConstraintEqualToAnchor(_addButton.BottomAnchor, 2).Active = true;          
+            _optionView.BottomAnchor.ConstraintEqualToAnchor(_addButton.BottomAnchor, 2).Active = true;
+            scrolledView.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor, 25f).Active = true;
             scrolledView.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor, 20 + IndentValue()).Active = true;
-            scrolledView.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor, 25).Active = true;
-            KeyValueTableEntryOption.Property.PropertyChanged += OnListChanged;
+
+            KeyValueTypeTableOption.Property.PropertyChanged += OnListChanged;
 
             UpdateListFromModel();
         }
@@ -180,44 +203,9 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
         }
 
-        public void OnValueEdited(object sender, EventArgs e)
-        {
-            var sObject = ((NSNotification)sender).Object;
-
-            if (sObject == null)
-            {
-                return;
-            }
-
-            var textField = (NSTextField)(sObject);
-            
-            int row = (int)textField.Tag;
-            string? newText = textField.StringValue;
-            if (string.IsNullOrEmpty(newText))
-            {
-                return;
-            }
-
-            if (textField.Identifier.Equals(KeyColumnId))
-            {
-               Items[(int)row].Key = newText;
-            }
-            else if (textField.Identifier.Equals(ValueColumnId))
-            {
-               Items[(int)row].Value = newText;
-            }
-
-            UpdateModelFromList();
- 
-        }
-
         private void OnAddClicked(object sender, EventArgs e)
         {
-
-            Items.Add(new KeyValueItem(string.Empty, string.Empty));
-        
-            UpdateModelFromList();
-            RefreshList();
+            KeyValueTypeTableOption.AddInvoke(sender, e);
         }
 
         private void OnRemoveClicked(object sender, EventArgs e)
@@ -234,6 +222,11 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             Items.RemoveAt(selectedRow);
             UpdateModelFromList();
             RefreshList();
+        }
+
+        private void OnEditClicked(object sender, EventArgs e)
+        {
+            KeyValueTypeTableOption.EditInvoke(sender, e);
         }
 
         private void TableSelectLastItem()
@@ -260,18 +253,18 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
         }
     }
 
-    internal class KeyValueTableSource : NSTableViewSource
+    internal class KeyValueTypeTableSource : NSTableViewSource
     {
-        private readonly KeyValueTableEntryOptionVSMac _platform;
+        private readonly KeyValueTypeTableOptionVSMac _platform;
 
-        public KeyValueTableSource(KeyValueTableEntryOptionVSMac platform)
+        public KeyValueTypeTableSource(KeyValueTypeTableOptionVSMac platform)
         {
             _platform = platform;
         }
 
         public override NSView GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, nint row)
         {
-    
+
             var view = (NSTableCellView)tableView.MakeView(tableColumn.Identifier, this);
             if (view == null)
             {
@@ -282,30 +275,32 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                         Frame = new CoreGraphics.CGRect(0, 2, tableColumn.Width, 20),
                         Hidden = false,
                         Bordered = false,
-                        DrawsBackground = true,
+                        DrawsBackground = false,
                         Highlighted = false,
+                        Editable = false,
                         Identifier = tableColumn.Identifier
                     },
-          
+
                     Identifier = tableColumn.Identifier
                 };
-
                 view.AddSubview(view.TextField);
-
-                view.TextField.EditingEnded += _platform.OnValueEdited;
             }
 
             view.TextField.Tag = row;
 
             string value = string.Empty;
 
-            if (tableColumn.Identifier == KeyValueTableEntryOptionVSMac.KeyColumnId)
+            if (tableColumn.Identifier == KeyValueTypeTableOptionVSMac.KeyColumnId)
             {
                 value = _platform.Items[(int)row].Key;
             }
-            else if(tableColumn.Identifier == KeyValueTableEntryOptionVSMac.ValueColumnId)
+            else if (tableColumn.Identifier == KeyValueTypeTableOptionVSMac.ValueColumnId)
             {
                 value = _platform.Items[(int)row].Value;
+            }
+            else if (tableColumn.Identifier == KeyValueTypeTableOptionVSMac.TypeColumnId)
+            {
+                value = _platform.Items[(int)row].Type;
             }
 
             view.TextField.StringValue = value;

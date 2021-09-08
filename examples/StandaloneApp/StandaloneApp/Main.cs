@@ -12,6 +12,7 @@ namespace Microsoft.VisualStudioUI.StandaloneApp
         {
             OptionCards cards = new OptionCards();
             cards.AddCard(TestEnableCard());
+            cards.AddCard(RunconfigurationCard());
             cards.AddCard(ITunesArtworkCard());
             cards.AddCard(SigningCard());
             cards.AddCard(SiriCard());
@@ -30,14 +31,6 @@ namespace Microsoft.VisualStudioUI.StandaloneApp
             {
                 Label = "Test enable"
             };
-
-            var variablesTable = new KeyValueTableEntryOption(new ViewModelProperty<ImmutableArray<KeyValueItem>>("")) {
-                AddButtonTitle = "Add",
-                RemoveButtonTitle = "Remove",
-                ValuesColumnTitle = "Values",
-                VariablesColumnTitle = "Variables"
-            };
-            card.AddOption(variablesTable);
 
             var dependOn = new CheckBoxOption(BoolProp(false)) { ButtonLabel = "enable" };
 
@@ -74,6 +67,37 @@ namespace Microsoft.VisualStudioUI.StandaloneApp
             card.AddOption(disableBtn);
             card.AddOption(disable);
 
+            return card;
+        }
+
+        private static OptionCard RunconfigurationCard()
+        {
+            var card = new OptionCard() { Label = "Configuration" };
+
+            var variablesTable = new KeyValueTableEntryOption(new ViewModelProperty<ImmutableArray<KeyValueItem>>(""))
+            {
+                Label = "Variables",
+                AddButtonTitle = "Add",
+                RemoveButtonTitle = "Remove",
+                ValueColumnTitle = "Values",
+                KeyColumnTitle = "Variables"
+            };
+
+            card.AddOption(variablesTable);
+            card.AddOption(new SeparatorOption());
+
+            var variablesTable1 = new KeyValueTypeTableOption(new ViewModelProperty<ImmutableArray<KeyValueItem>>(""))
+            {
+                Label = "Variables",
+                AddButtonTitle = "Add",
+                RemoveButtonTitle = "Remove",
+                EditButtonTitle = "Edit",
+                KeyColumnTitle = "Variables",
+                ValueColumnTitle = "Values",
+                TypeColumnTitle = "Type"
+            };
+
+            card.AddOption(variablesTable1);
             return card;
         }
 

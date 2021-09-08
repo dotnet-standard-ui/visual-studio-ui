@@ -47,5 +47,6 @@ namespace Microsoft.VisualStudioUI.Options
         public abstract OptionPlatform CreateCreateDirectoryOptionlatform(DirectoryOption directoryOption);
         public abstract OptionPlatform CreateCreateProjectFileOptionlatform(ProjectFileOption projectFileOption);
         public abstract OptionPlatform CreateKeyValueTableEntryOptionPlatform(KeyValueTableEntryOption keyValueTableEntryOption);
+        public abstract OptionPlatform CreateKeyValueTypeTableOptionPlatform(KeyValueTypeTableOption keyValueTypeTableOption);
     }
 }

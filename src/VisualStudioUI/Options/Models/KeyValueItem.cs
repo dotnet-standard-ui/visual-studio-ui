@@ -2,13 +2,15 @@
 {
     public class KeyValueItem
     {
-        public string Variable { get; set; }
+        public string Key { get; set; }
         public string Value { get; set; }
+        public string Type { get; set; }
 
-        public KeyValueItem(string variable, string value)
+        public KeyValueItem(string variable, string value, string type = "")
         {
-            Variable = variable;
+            Key = variable;
             Value = value;
+            Type = type;
         }
     }
 }

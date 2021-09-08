@@ -70,5 +70,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
         public override OptionPlatform CreateKeyValueTableEntryOptionPlatform(KeyValueTableEntryOption keyValueTableEntryOption) =>
             new KeyValueTableEntryOptionVSMac(keyValueTableEntryOption);
 
+        public override OptionPlatform CreateKeyValueTypeTableOptionPlatform(KeyValueTypeTableOption keyValueTypeTableOption) =>
+            new KeyValueTypeTableOptionVSMac(keyValueTypeTableOption);
+
     }
 }
