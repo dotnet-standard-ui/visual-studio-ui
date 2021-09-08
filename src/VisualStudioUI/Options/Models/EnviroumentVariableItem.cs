@@ -5,10 +5,10 @@
         public string Variable { get; set; }
         public string Value { get; set; }
 
-        public EnviroumentVariableItem(string title, string selected)
+        public EnviroumentVariableItem(string variable, string value)
         {
-            Variable = title;
-            Value = selected;
+            Variable = variable;
+            Value = value;
         }
     }
 }

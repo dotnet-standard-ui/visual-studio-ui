@@ -8,10 +8,10 @@ using Microsoft.VisualStudioUI.Options.Models;
 
 namespace Microsoft.VisualStudioUI.VSMac.Options
 {
-    public class EnvironmentVariableOptionVSMac : OptionVSMac
+    public class KeyValueTableEntryOptionVSMac : OptionVSMac
     {
-        internal const string VariablesColumnId = "VariablesColumnId";
-        internal const string ValuesColumnId = "ValuesColumnId";
+        internal const string KeyColumnId = "FirstColumnId";
+        internal const string ValueColumnId = "SecondColumnId";
 
         internal List<EnviroumentVariableItem> Items;
 
@@ -19,7 +19,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
         private NSTableView _tableView;
         private NSButton _addButton, _removeButton;
 
-        public EnvironmentVariableOptionVSMac(EnvironmentVariableOption option) : base(option)
+        public KeyValueTableEntryOptionVSMac(KeyValueTableEntryOption option) : base(option)
         {
             Items = new List<EnviroumentVariableItem >();
         }
@@ -27,11 +27,11 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
         private void UpdateListFromModel()
         {
             Items.Clear();
-            if(EnvironmentVariableOption.Property.Value == null)
+            if(KeyValueTableEntryOption.Property.Value == null)
             {
                 return;
             }
-            foreach (var item in EnvironmentVariableOption.Property.Value)
+            foreach (var item in KeyValueTableEntryOption.Property.Value)
             {
                 Items.Add(item);
             }
@@ -39,11 +39,11 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
         private void UpdateModelFromList()
         {
-            EnvironmentVariableOption.Property.PropertyChanged -= OnListChanged;
+            KeyValueTableEntryOption.Property.PropertyChanged -= OnListChanged;
 
-            EnvironmentVariableOption.Property.Value = Items.ToImmutableArray();
+            KeyValueTableEntryOption.Property.Value = Items.ToImmutableArray();
 
-            EnvironmentVariableOption.Property.PropertyChanged += OnListChanged;
+            KeyValueTableEntryOption.Property.PropertyChanged += OnListChanged;
         }
 
         public override NSView View
@@ -59,7 +59,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             }
         }
 
-        public EnvironmentVariableOption EnvironmentVariableOption => ((EnvironmentVariableOption)Option);
+        public KeyValueTableEntryOption KeyValueTableEntryOption => ((KeyValueTableEntryOption)Option);
 
         public IntPtr Handle => throw new NotImplementedException();
 
@@ -72,12 +72,18 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
             _tableView = new NSTableView()
             {
-                Source = new VariableSource(this),
+                Source = new KeyValueTableSource(this),
+                AllowsColumnReordering = false,
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
 
-            _tableView.AddColumn(new NSTableColumn(VariablesColumnId) { Title = EnvironmentVariableOption.VariablesColumnTitle});
-            _tableView.AddColumn(new NSTableColumn(ValuesColumnId) { Title = EnvironmentVariableOption.ValuesColumnTitle });
+            _tableView.AddColumn(new NSTableColumn(KeyColumnId) {
+                Title = KeyValueTableEntryOption.VariablesColumnTitle,
+            } );
+
+            _tableView.AddColumn(new NSTableColumn(ValueColumnId) {
+                Title = KeyValueTableEntryOption.ValuesColumnTitle,              
+            });
 
             var scrolledView = new NSScrollView()
             {
@@ -93,8 +99,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             _addButton = new NSButton
             {
                 BezelStyle = NSBezelStyle.RoundRect,
-                Title = EnvironmentVariableOption.AddButtonTitle,
-                ToolTip = EnvironmentVariableOption.AddToolTip,
+                Title = KeyValueTableEntryOption.AddButtonTitle,
+                ToolTip = KeyValueTableEntryOption.AddToolTip,
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
             _addButton.SizeToFit();
@@ -102,8 +108,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             _removeButton = new NSButton
             {
                 BezelStyle = NSBezelStyle.RoundRect,
-                Title = EnvironmentVariableOption.RemoveButtonTitle,
-                ToolTip = EnvironmentVariableOption.RemoveToolTip,
+                Title = KeyValueTableEntryOption.RemoveButtonTitle,
+                ToolTip = KeyValueTableEntryOption.RemoveToolTip,
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
             _removeButton.SizeToFit();
@@ -142,7 +148,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
           
             scrolledView.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor, 20 + IndentValue()).Active = true;
 
-            EnvironmentVariableOption.Property.PropertyChanged += OnListChanged;
+            KeyValueTableEntryOption.Property.PropertyChanged += OnListChanged;
 
             UpdateListFromModel();
         }
@@ -195,11 +201,11 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 return;
             }
 
-            if (textField.Identifier.Equals(VariablesColumnId))
+            if (textField.Identifier.Equals(KeyColumnId))
             {
                Items[(int)row].Variable = newText;
             }
-            else if (textField.Identifier.Equals(ValuesColumnId))
+            else if (textField.Identifier.Equals(ValueColumnId))
             {
                Items[(int)row].Value = newText;
             }
@@ -257,11 +263,11 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
         }
     }
 
-    internal class VariableSource : NSTableViewSource
+    internal class KeyValueTableSource : NSTableViewSource
     {
-        private readonly EnvironmentVariableOptionVSMac _platform;
+        private readonly KeyValueTableEntryOptionVSMac _platform;
 
-        public VariableSource(EnvironmentVariableOptionVSMac platform)
+        public KeyValueTableSource(KeyValueTableEntryOptionVSMac platform)
         {
             _platform = platform;
         }
@@ -295,11 +301,11 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
             string value = string.Empty;
 
-            if (tableColumn.Identifier == EnvironmentVariableOptionVSMac.VariablesColumnId)
+            if (tableColumn.Identifier == KeyValueTableEntryOptionVSMac.KeyColumnId)
             {
                 value = _platform.Items[(int)row].Variable;
             }
-            else if(tableColumn.Identifier == EnvironmentVariableOptionVSMac.ValuesColumnId)
+            else if(tableColumn.Identifier == KeyValueTableEntryOptionVSMac.ValueColumnId)
             {
                 value = _platform.Items[(int)row].Value;
             }

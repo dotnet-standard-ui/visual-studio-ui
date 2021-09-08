@@ -3,7 +3,7 @@ using Microsoft.VisualStudioUI.Options.Models;
 
 namespace Microsoft.VisualStudioUI.Options
 {
-    public class EnvironmentVariableOption: Option
+    public class KeyValueTableEntryOption: Option
     {
         public string VariablesColumnTitle = string.Empty;
         public string ValuesColumnTitle = string.Empty;
@@ -14,11 +14,11 @@ namespace Microsoft.VisualStudioUI.Options
 
         public ViewModelProperty<ImmutableArray<EnviroumentVariableItem>> Property { get; }
 
-        public EnvironmentVariableOption(ViewModelProperty<ImmutableArray<EnviroumentVariableItem>> model)
+        public KeyValueTableEntryOption(ViewModelProperty<ImmutableArray<EnviroumentVariableItem>> model)
         {
             Property = model;
             Property.Bind();
-            Platform = OptionFactoryPlatform.Instance.CreateEnvironmentVariableOptionPlatform(this);
+            Platform = OptionFactoryPlatform.Instance.CreateKeyValueTableEntryOptionPlatform(this);
         }
     }
 
