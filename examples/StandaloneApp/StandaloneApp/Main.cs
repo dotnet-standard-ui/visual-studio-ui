@@ -31,7 +31,7 @@ namespace Microsoft.VisualStudioUI.StandaloneApp
                 Label = "Test enable"
             };
 
-            var variablesTable = new KeyValueTableEntryOption(new ViewModelProperty<ImmutableArray<EnviroumentVariableItem>>("")) {
+            var variablesTable = new KeyValueTableEntryOption(new ViewModelProperty<ImmutableArray<KeyValueItem>>("")) {
                 AddButtonTitle = "Add",
                 RemoveButtonTitle = "Remove",
                 ValuesColumnTitle = "Values",

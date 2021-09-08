@@ -12,9 +12,9 @@ namespace Microsoft.VisualStudioUI.Options
         public string AddToolTip = string.Empty;
         public string RemoveToolTip = string.Empty;
 
-        public ViewModelProperty<ImmutableArray<EnviroumentVariableItem>> Property { get; }
+        public ViewModelProperty<ImmutableArray<KeyValueItem>> Property { get; }
 
-        public KeyValueTableEntryOption(ViewModelProperty<ImmutableArray<EnviroumentVariableItem>> model)
+        public KeyValueTableEntryOption(ViewModelProperty<ImmutableArray<KeyValueItem>> model)
         {
             Property = model;
             Property.Bind();
