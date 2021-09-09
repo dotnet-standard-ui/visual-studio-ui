@@ -17,10 +17,11 @@ namespace Microsoft.VisualStudioUI.Options
         public string EditToolTip = string.Empty;
 
         public ViewModelProperty<ImmutableArray<KeyValueItem>> Property { get; }
+        public ViewModelProperty<KeyValueItem> SelectedProperty { get;}
 
         public event EventHandler? AddClicked;
         public event EventHandler? EditClicked;
-
+        public event EventHandler? RemoveClicked;
 
         public void AddInvoke(object sender, EventArgs e)
         {
@@ -32,10 +33,17 @@ namespace Microsoft.VisualStudioUI.Options
             EditClicked?.Invoke(sender, e);
         }
 
-        public KeyValueTypeTableOption(ViewModelProperty<ImmutableArray<KeyValueItem>> model)
+        public void RemoveInvoke(object sender, EventArgs e)
         {
-            Property = model;
+            RemoveClicked?.Invoke(sender, e);
+        }
+
+        public KeyValueTypeTableOption(ViewModelProperty<KeyValueItem> selectedProperty, ViewModelProperty<ImmutableArray<KeyValueItem>> property)
+        {
+            Property = property;
             Property.Bind();
+            SelectedProperty = selectedProperty;
+            SelectedProperty.Bind();
             Platform = OptionFactoryPlatform.Instance.CreateKeyValueTypeTableOptionPlatform(this);
         }
     }

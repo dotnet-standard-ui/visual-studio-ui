@@ -34,6 +34,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             {
                 Items.Add(item);
             }
+            RefreshList();
         }
 
         private void UpdateModelFromList()
@@ -188,6 +189,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
         private void OnSelectionChanged(object sender, EventArgs e)
         {
             _removeButton.Enabled = (_tableView.SelectedCell != null);
+            _editButton.Enabled = _removeButton.Enabled;
 
         }
 
@@ -210,18 +212,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
         private void OnRemoveClicked(object sender, EventArgs e)
         {
-            int selectedRow = (int)_tableView.SelectedRow;
-
-            if (selectedRow < 0 || selectedRow >= Items.Count)
-            {
-                return;
-            }
-            //fix reference bug when selected row in textfield editing state
-            NSTableRowView? view = _tableView.GetRowView(selectedRow, false);
-            view.Window.MakeFirstResponder(null);
-            Items.RemoveAt(selectedRow);
-            UpdateModelFromList();
-            RefreshList();
+            KeyValueTypeTableOption.RemoveInvoke(sender, e);
         }
 
         private void OnEditClicked(object sender, EventArgs e)
@@ -260,6 +251,12 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
         public KeyValueTypeTableSource(KeyValueTypeTableOptionVSMac platform)
         {
             _platform = platform;
+        }
+
+        public override bool ShouldSelectRow(NSTableView tableView, nint row)
+        {
+            _platform.KeyValueTypeTableOption.SelectedProperty.Value = _platform.Items[(int)row];
+            return base.ShouldSelectRow(tableView, row);
         }
 
         public override NSView GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, nint row)
