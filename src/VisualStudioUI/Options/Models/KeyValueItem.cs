@@ -6,9 +6,9 @@
         public string Value { get; set; }
         public string Type { get; set; }
 
-        public KeyValueItem(string variable, string value, string type = "")
+        public KeyValueItem(string key, string value, string type = "")
         {
-            Key = variable;
+            Key = key;
             Value = value;
             Type = type;
         }
