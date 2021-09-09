@@ -86,7 +86,7 @@ namespace Microsoft.VisualStudioUI.StandaloneApp
             card.AddOption(variablesTable);
             card.AddOption(new SeparatorOption());
 
-            var variablesTable1 = new KeyValueTypeTableOption(new ViewModelProperty<ImmutableArray<KeyValueItem>>(""))
+            var variablesTable1 = new KeyValueTypeTableOption(new ViewModelProperty<KeyValueItem>("") , new ViewModelProperty<ImmutableArray<KeyValueItem>>(""))
             {
                 Label = "Variables",
                 AddButtonTitle = "Add",
