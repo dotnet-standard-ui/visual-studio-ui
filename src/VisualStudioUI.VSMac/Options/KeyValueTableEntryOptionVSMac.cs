@@ -76,12 +76,13 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
 
-            _tableView.AddColumn(new NSTableColumn(KeyColumnId) {
-                Title = KeyValueTableEntryOption.KeyColumnTitle,
-            } );
+            _tableView.AddColumn(new NSTableColumn(KeyColumnId){
+                Title = KeyValueTableEntryOption.KeyColumnTitle
+            });
 
-            _tableView.AddColumn(new NSTableColumn(ValueColumnId) {
-                Title = KeyValueTableEntryOption.ValueColumnTitle,              
+            _tableView.AddColumn(new NSTableColumn(ValueColumnId)
+            {
+                Title = KeyValueTableEntryOption.ValueColumnTitle,
             });
 
             var scrolledView = new NSScrollView()
@@ -118,20 +119,20 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
             if (!string.IsNullOrEmpty(Option.Label))
             {
-                var left = new NSTextField();
-                left.Editable = false;
-                left.Bordered = false;
-                left.DrawsBackground = false;
-                left.StringValue = Option.Label + ":";
-                left.Alignment = NSTextAlignment.Left;
-                left.Font = NSFont.SystemFontOfSize(NSFont.SystemFontSize);
-                left.TextColor = NSColor.LabelColor;
-                left.TranslatesAutoresizingMaskIntoConstraints = false;
-                left.SizeToFit();
-                _optionView.AddSubview(left);
-                left.LeadingAnchor.ConstraintEqualToAnchor(scrolledView.LeadingAnchor, IndentValue()).Active = true;
-                left.WidthAnchor.ConstraintEqualToConstant(205).Active = true;
-                left.BottomAnchor.ConstraintEqualToAnchor(scrolledView.TopAnchor, -2).Active = true;
+                var title = new NSTextField();
+                title.Editable = false;
+                title.Bordered = false;
+                title.DrawsBackground = false;
+                title.StringValue = Option.Label + ":";
+                title.Alignment = NSTextAlignment.Left;
+                title.Font = NSFont.SystemFontOfSize(NSFont.SystemFontSize);
+                title.TextColor = NSColor.LabelColor;
+                title.TranslatesAutoresizingMaskIntoConstraints = false;
+                title.SizeToFit();
+                _optionView.AddSubview(title);
+                title.LeadingAnchor.ConstraintEqualToAnchor(scrolledView.LeadingAnchor, IndentValue()).Active = true;
+                title.WidthAnchor.ConstraintEqualToConstant(205).Active = true;
+                title.BottomAnchor.ConstraintEqualToAnchor(scrolledView.TopAnchor, -2).Active = true;
             }
             scrolledView.HeightAnchor.ConstraintEqualToConstant(200f).Active = true;
             scrolledView.WidthAnchor.ConstraintEqualToConstant(560f).Active = true;
