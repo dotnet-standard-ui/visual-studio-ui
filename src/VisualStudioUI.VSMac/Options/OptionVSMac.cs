@@ -34,25 +34,30 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             var label = new NSTextField();
             label.Editable = false;
             label.Bordered = false;
+            
             label.DrawsBackground = false;
             label.PreferredMaxLayoutWidth = 1;
+
             // TODO: Make the colon be localization friendly
             label.StringValue = labelString + ":";
-            label.HeightAnchor.ConstraintEqualToConstant(16f).Active = true;
 
             label.Alignment = NSTextAlignment.Right;
             label.TextColor = NSColor.LabelColor;
             label.TranslatesAutoresizingMaskIntoConstraints = false;
-
-            if(labelString.Length < 32)
+            label.MaximumNumberOfLines = 2;
+            if (labelString.Length < 32)
             {
                 label.Font = NSFont.SystemFontOfSize(NSFont.SystemFontSize);
             }
+            else if(labelString.Length < 42){
+                label.Font = NSFont.SystemFontOfSize(12f);
+            }
             else
             {
-                label.Font = NSFont.SystemFontOfSize(11f);
+                label.Font = NSFont.SystemFontOfSize(10f);
             }
-
+            label.SizeToFit();
+            label.HeightAnchor.ConstraintGreaterThanOrEqualToConstant(12f).Active = true;
             label.WidthAnchor.ConstraintGreaterThanOrEqualToConstant(213f).Active = true;
 
             return label;
