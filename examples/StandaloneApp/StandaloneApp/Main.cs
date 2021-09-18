@@ -39,6 +39,7 @@ namespace Microsoft.VisualStudioUI.StandaloneApp
             var error = new ViewModelProperty<Message?>("", new Message("warning", MessageSeverity.Error));
 
             card.AddOption(dependOn);
+            card.AddOption(new ButtonOption() { Label = "Test Disable", ButtonLabel = "testing", PopoverMessage = "abc" });
             card.AddOption(new SeparatorOption());
             card.AddOption(new CheckBoxOption(BoolProp(false)) { ButtonLabel = "test", DisablebilityDependsOn = dependOn });
             card.AddOption(new DocButtonOption(StringProp("test"), "test") { DisablebilityDependsOn = dependOn });
@@ -46,7 +47,7 @@ namespace Microsoft.VisualStudioUI.StandaloneApp
             card.AddOption(new TextOption(StringProp("")) { Label = "test error", ValidationMessage = error, DisablebilityDependsOn = dependOn });
             card.AddOption(new DirectoryOption(StringProp("")) { Label = "Choose Firectory", Hint = "hint", DisablebilityDependsOn = dependOn });
             card.AddOption(new ProjectFileOption(StringProp("")) { Label = "Choose File", Hint = "hint" , DisablebilityDependsOn = dependOn });
-            TextOption fileEntry = new TextOption(StringProp(""))
+            TextOption fileEntry = new TextOption(StringProp(""), "user id")
             {
                 Label = "Uncompressed resource extensions",
                 DisablebilityDependsOn = dependOn
@@ -96,7 +97,9 @@ namespace Microsoft.VisualStudioUI.StandaloneApp
                 ValueColumnTitle = "Values",
                 TypeColumnTitle = "Type"
             };
-
+            
+            variablesTable1.Property.Value = ImmutableArray.Create(new KeyValueItem("aaa", "aa", "str"),new KeyValueItem("aaa", "aa", "str"),new KeyValueItem("aaa", "aa", "str"), new KeyValueItem("aaa", "aa", "str"));
+            variablesTable1.SelectedProperty.Bind();
             card.AddOption(variablesTable1);
             return card;
         }
@@ -237,8 +240,15 @@ namespace Microsoft.VisualStudioUI.StandaloneApp
                 RemoveToolTip = "Click to remove the selected Keychain Access Group",
                 Label = "Keychain Groups",
                 DefaultValue = "BundleIdentifier",
-                PrefixValue = "AppIdentifierPrefix"
+                PrefixValue = "AppIdentifierPrefix",
+                Editable = false,
             };
+
+            keychainAccessGroupsList.AddClicked += (sender,e) => {
+                
+                return "hello";
+            };
+
 
             card.AddOption(keychainAccessGroupsList);
 

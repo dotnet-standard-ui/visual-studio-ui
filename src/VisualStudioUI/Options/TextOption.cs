@@ -8,14 +8,15 @@ namespace Microsoft.VisualStudioUI.Options
     /// </summary>
     public class TextOption : Option
     {
-        public bool Editable { get; set; } = true;
-        public bool Bordered { get; set; } = true;
-        public bool DrawsBackground { get; set; } = true;
+        public string? PlaceholderText { get; }
+        public bool AllowOnlyNumbers { get; set; } = false;
+
         public ImmutableArray<MacroMenuItem> MacroMenuItems { get; set; }
 
-        public TextOption(ViewModelProperty<string> property)
+        public TextOption(ViewModelProperty<string> property, string? placeholder = null)
         {
             Property = property;
+            PlaceholderText = placeholder;
             Platform = OptionFactoryPlatform.Instance.CreateTextOptionPlatform(this);
         }
 

@@ -14,14 +14,21 @@ namespace Microsoft.VisualStudioUI.Options
         public string DefaultValue = string.Empty;
         public string AddToolTip = string.Empty;
         public string RemoveToolTip = string.Empty;
+        public bool Editable { get; set; } = true;
 
         public event EventHandler? ListChanged;
+        public Func<object, EventArgs, string>? AddClicked = null;
 
         public ViewModelProperty<ImmutableArray<string>> Model { get; }
 
         public void ListChangedInvoke(object sender, EventArgs e)
         {
             ListChanged?.Invoke(sender, e);
+        }
+
+        public string? AddInvoke(object sender, EventArgs e)
+        {
+            return AddClicked?.Invoke(sender, e);
         }
 
         public StringListOption(ViewModelProperty<ImmutableArray<string>> model, string addToolTip = "", string removeToolTip = "", string label = "", string defaultListValue = "")

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using AppKit;
+using Foundation;
 using Microsoft.VisualStudioUI.Options;
 using Microsoft.VisualStudioUI.Options.Models;
 
@@ -72,6 +73,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             {
                 Source = new KeyValueTypeTableSource(this),
                 AllowsColumnReordering = false,
+                AllowsMultipleSelection = false,
+                SelectionHighlightStyle = NSTableViewSelectionHighlightStyle.Regular,
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
 
@@ -129,7 +132,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
             _editButton.SizeToFit();
-            _editButton.Activated += OnRemoveClicked;
+            _editButton.Activated += OnEditClicked;
 
             _optionView.AddSubview(_addButton);
             _optionView.AddSubview(_removeButton);
@@ -170,7 +173,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             scrolledView.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor, 20 + IndentValue()).Active = true;
 
             KeyValueTypeTableOption.Property.PropertyChanged += OnListChanged;
-
+            KeyValueTypeTableOption.SelectedProperty.PropertyChanged += OnSelectionChanged;
             UpdateListFromModel();
         }
 
@@ -188,9 +191,13 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
         private void OnSelectionChanged(object sender, EventArgs e)
         {
-            _removeButton.Enabled = (_tableView.SelectedCell != null);
-            _editButton.Enabled = _removeButton.Enabled;
+            UpdateButtonEnable();
+        }
 
+        internal void UpdateButtonEnable()
+        {
+            _editButton.Enabled = _tableView.SelectedRow != -1;
+            _removeButton.Enabled = _editButton.Enabled;
         }
 
         private void OnListChanged(object sender, EventArgs e)
@@ -199,9 +206,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
             _tableView.ReloadData();
 
-            TableSelectLastItem();
-
-            _removeButton.Enabled = Items.Count > 0;
+            UpdateButtonEnable();
 
         }
 
@@ -220,27 +225,10 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             KeyValueTypeTableOption.EditInvoke(sender, e);
         }
 
-        private void TableSelectLastItem()
-        {
-            if (Items.Count <= 0)
-            {
-                return;
-            }
-            int selectRow = Items.Count - 1;
-
-            _tableView.SelectRow(selectRow, false);
-            _tableView.ScrollRowToVisible(selectRow);
-        }
-
-
         private void RefreshList()
         {
             _tableView.ReloadData();
-
-            TableSelectLastItem();
-
-            _removeButton.Enabled = Items.Count > 0;
-
+            UpdateButtonEnable();
         }
     }
 
@@ -256,7 +244,12 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
         public override bool ShouldSelectRow(NSTableView tableView, nint row)
         {
             _platform.KeyValueTypeTableOption.SelectedProperty.Value = _platform.Items[(int)row];
-            return base.ShouldSelectRow(tableView, row);
+            return true;
+        }
+
+        public override void SelectionDidChange(NSNotification notification)
+        {
+            _platform.UpdateButtonEnable();
         }
 
         public override NSView GetViewForItem(NSTableView tableView, NSTableColumn tableColumn, nint row)
@@ -273,7 +266,6 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                         Hidden = false,
                         Bordered = false,
                         DrawsBackground = false,
-                        Highlighted = false,
                         Editable = false,
                         Identifier = tableColumn.Identifier
                     },

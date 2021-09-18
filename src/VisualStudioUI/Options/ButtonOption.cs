@@ -10,6 +10,7 @@ namespace Microsoft.VisualStudioUI.Options
     public class ButtonOption : Option
     {
         public string ButtonLabel { get; set; } = "";
+        public string PopoverMessage { get; set; } = "";
 
         public event EventHandler? Clicked;
 

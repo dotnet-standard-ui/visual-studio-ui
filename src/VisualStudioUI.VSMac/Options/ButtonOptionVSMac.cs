@@ -22,12 +22,16 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 {
                     _button = new NSButton();
                     _button.BezelStyle = NSBezelStyle.RoundRect;
-                    _button.Activated += ButtonOption.ButtonClicked;
                     _button.ControlSize = NSControlSize.Regular;
                     _button.Font = NSFont.SystemFontOfSize(NSFont.SystemFontSize);
                     _button.Title = ButtonOption.ButtonLabel;
                     _button.TranslatesAutoresizingMaskIntoConstraints = false;
                     _button.SizeToFit();
+
+                    if (!string.IsNullOrWhiteSpace(ButtonOption.PopoverMessage))
+                        _button.Activated += (o, args) => ShowHintPopover(ButtonOption.PopoverMessage, _button, 500);
+                    else
+                        _button.Activated += ButtonOption.ButtonClicked;
                 }
 
                 return _button!;
