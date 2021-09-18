@@ -42,7 +42,7 @@ namespace Microsoft.VisualStudioUI.StandaloneApp
             card.AddOption(new SeparatorOption());
             card.AddOption(new CheckBoxOption(BoolProp(false)) { ButtonLabel = "test", DisablebilityDependsOn = dependOn });
             card.AddOption(new DocButtonOption(StringProp("test"), "test") { DisablebilityDependsOn = dependOn });
-            card.AddOption(new TextOption(StringProp("")) { Label = "test warningtest warningtest warningtest warningtest", ValidationMessage = warning, DisablebilityDependsOn = dependOn });
+            card.AddOption(new TextOption(StringProp("")) { Label = "Change the language to Russia and French", ValidationMessage = warning, DisablebilityDependsOn = dependOn });
             card.AddOption(new TextOption(StringProp("")) { Label = "test error", ValidationMessage = error, DisablebilityDependsOn = dependOn });
             card.AddOption(new DirectoryOption(StringProp("")) { Label = "Choose Firectory", Hint = "hint", DisablebilityDependsOn = dependOn });
             card.AddOption(new ProjectFileOption(StringProp("")) { Label = "Choose File", Hint = "hint" , DisablebilityDependsOn = dependOn });

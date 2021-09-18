@@ -53,7 +53,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 _optionView.AddSubview(_label);
 
                 _label.TrailingAnchor.ConstraintEqualToAnchor(_control.LeadingAnchor, -8f).Active = true;
-                _label.TopAnchor.ConstraintEqualToAnchor(_control.TopAnchor).Active = true;
+                _label.CenterYAnchor.ConstraintEqualToAnchor(_control.CenterYAnchor).Active = true;
             }
 
             NSTextField? descriptionView = CreateDescriptionView();

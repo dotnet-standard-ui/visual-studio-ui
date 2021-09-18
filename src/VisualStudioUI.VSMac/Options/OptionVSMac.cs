@@ -32,6 +32,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
             // View:     label
             var label = new NSTextField();
+            label.Cell = new VerticallyCenteredTextFieldCell(yOffset:-1);
             label.Editable = false;
             label.Bordered = false;
             
@@ -49,7 +50,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             {
                 label.Font = NSFont.SystemFontOfSize(NSFont.SystemFontSize);
             }
-            else if(labelString.Length < 42){
+            else if(labelString.Length < 38)
+            {
                 label.Font = NSFont.SystemFontOfSize(12f);
             }
             else
@@ -57,7 +59,6 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 label.Font = NSFont.SystemFontOfSize(10f);
             }
             label.SizeToFit();
-            label.HeightAnchor.ConstraintGreaterThanOrEqualToConstant(12f).Active = true;
             label.WidthAnchor.ConstraintGreaterThanOrEqualToConstant(213f).Active = true;
 
             return label;
