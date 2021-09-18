@@ -244,12 +244,6 @@ namespace Microsoft.VisualStudioUI.StandaloneApp
                 Editable = false,
             };
 
-            keychainAccessGroupsList.AddClicked += (sender,e) => {
-                
-                return "hello";
-            };
-
-
             card.AddOption(keychainAccessGroupsList);
 
             return card;
