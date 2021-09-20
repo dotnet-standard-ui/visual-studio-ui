@@ -225,14 +225,13 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
             try
             {
-                if(StringListOption.AddClicked == null)
+                if (StringListOption.AddClicked == null)
                 {
                     _stringList.Add(defalutString);
 
                     UpdateModelFromStringList();
                     RefreshList();
                     StringListOption.ListChangedInvoke(sender, e);
-
                 }
                 else
                 {
@@ -245,8 +244,6 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                         StringListOption.ListChangedInvoke(sender, e);
                     }
                 }
-
-
             }
             catch
             {
