@@ -34,12 +34,13 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
                     _textField = new NSTextField
                     {
-                        Font = NSFont.SystemFontOfSize(NSFont.SystemFontSize),
+                        Font = NSFont.SystemFontOfSize(NSFont.SmallSystemFontSize),
                         StringValue = property.Value ?? string.Empty,
                         TranslatesAutoresizingMaskIntoConstraints = false,
                         Editable = true,
                         Bordered = true,
                         DrawsBackground = true,
+                        LineBreakMode = NSLineBreakMode.TruncatingTail
                     };
                     SetAccessibilityTitleToLabel(_textField);
 
