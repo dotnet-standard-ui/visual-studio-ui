@@ -54,7 +54,10 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                     }
                     else
                     {
-                        itemsProperty.PropertyChanged += delegate { UpdateItemChoices(); };
+                        itemsProperty.PropertyChanged += delegate {
+                            UpdateItemChoices();
+                            UpdateHintButton();
+                        };
 
                         UpdateItemChoices();
                     }
@@ -99,7 +102,6 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             }
 
             UpdateSelectedItemUIFromProperty();
-
         }
 
         private void UpdateMultipleLevelMenuItemChoices()
