@@ -130,7 +130,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 _optionView.AddSubview(left);
                 left.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor, IndentValue()).Active = true;
                 left.WidthAnchor.ConstraintEqualToConstant(205).Active = true;
-                left.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor).Active = true;
+                left.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor, 10).Active = true;
             }
 
             _addButton.WidthAnchor.ConstraintEqualToConstant(30).Active = true;
@@ -146,7 +146,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             _removeButton.TopAnchor.ConstraintEqualToAnchor(_addButton.TopAnchor).Active = true;
             _removeButton.LeadingAnchor.ConstraintEqualToAnchor(_addButton.TrailingAnchor, 10).Active = true;
             _optionView.BottomAnchor.ConstraintEqualToAnchor(_addButton.BottomAnchor, 2).Active = true;
-            scrolledView.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor).Active = true;
+            scrolledView.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor, 10).Active = true;
 
             float leftSpace = Option.AllowSpaceForLabel ? 222f : 20f;
             scrolledView.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor, leftSpace + IndentValue()).Active = true;
