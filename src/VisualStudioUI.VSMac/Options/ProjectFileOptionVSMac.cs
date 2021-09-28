@@ -41,6 +41,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                         Bordered = true,
                         DrawsBackground = true,
                         LineBreakMode = NSLineBreakMode.TruncatingTail,
+
                     };
                     SetAccessibilityTitleToLabel(_textField);
 
