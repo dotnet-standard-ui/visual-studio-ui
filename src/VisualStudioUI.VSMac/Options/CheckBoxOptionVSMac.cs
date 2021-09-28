@@ -27,11 +27,21 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                     _button = NSButton.CreateCheckbox(CheckBoxOption.ButtonLabel, CheckBoxSelected);
                     _button.SetButtonType(NSButtonType.Radio);
                     _button.ControlSize = NSControlSize.Regular;
-                    _button.Font = NSFont.SystemFontOfSize(NSFont.SystemFontSize);
                     _button.Title = CheckBoxOption.ButtonLabel;
                     _button.TranslatesAutoresizingMaskIntoConstraints = false;
                     _button.State = CheckBoxOption.Property.Value ? NSCellStateValue.On : NSCellStateValue.Off;
-
+                    _button.LineBreakMode = NSLineBreakMode.TruncatingTail;
+                    if (_button.Title.Length > 97)
+                    {
+                        _button.Font = NSFont.SystemFontOfSize(10);
+                    }
+                    else if (_button.Title.Length > 80)
+                    {
+                        _button.Font = NSFont.SystemFontOfSize(NSFont.SmallSystemFontSize);
+                    } else
+                    {
+                        _button.Font = NSFont.SystemFontOfSize(NSFont.SystemFontSize);
+                    }
                     property.PropertyChanged += delegate
                     {
                         _button.State = CheckBoxOption.Property.Value ? NSCellStateValue.On : NSCellStateValue.Off;
