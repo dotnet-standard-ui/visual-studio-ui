@@ -40,8 +40,9 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                         Editable = true,
                         Bordered = true,
                         DrawsBackground = true,
-                        LineBreakMode = NSLineBreakMode.TruncatingTail,
+                        LineBreakMode = NSLineBreakMode.TruncatingTail
                     };
+
                     SetAccessibilityTitleToLabel(_textField);
 
                     _controlView.AddArrangedSubview(_textField);
