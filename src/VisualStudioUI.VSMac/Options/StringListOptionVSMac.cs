@@ -237,10 +237,6 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 {
                     if (string.IsNullOrWhiteSpace(defalutString))
                     {
-                        _stringList.Add(defalutString);
-
-                        UpdateModelFromStringList();
-                        RefreshList();
                         StringListOption.ListChangedInvoke(sender, e);
                     }
                 }
