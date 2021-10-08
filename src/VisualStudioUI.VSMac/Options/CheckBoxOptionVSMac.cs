@@ -35,7 +35,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                     {
                         _button.Font = NSFont.SystemFontOfSize(10);
                     }
-                    else if (_button.Title.Length > 74)
+                    else if (_button.Title.Length > 80)
                     {
                         _button.Font = NSFont.SystemFontOfSize(NSFont.SmallSystemFontSize);
                     } else
