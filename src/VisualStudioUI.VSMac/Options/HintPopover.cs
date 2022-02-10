@@ -4,6 +4,7 @@ using System;
 using Foundation;
 using AppKit;
 using CoreGraphics;
+using ObjCRuntime;
 
 namespace Microsoft.VisualStudioUI.VSMac.Options
 {
