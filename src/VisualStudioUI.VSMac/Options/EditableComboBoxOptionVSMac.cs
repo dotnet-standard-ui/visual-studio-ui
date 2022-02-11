@@ -31,7 +31,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                     };
                     SetAccessibilityTitleToLabel(_comboBox);
 
-                    _comboBox.WidthAnchor.ConstraintEqualToConstant(198f).Active = true;
+                    _comboBox.WidthAnchor.ConstraintEqualTo(198f).Active = true;
 
                     _comboBox.SelectionChanged += UpdatePropertyFromSelection;
                     _comboBox.Changed += UpdatePropertyFromUIEdit;

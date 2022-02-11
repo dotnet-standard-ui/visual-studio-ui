@@ -64,10 +64,10 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             };
 
             _optionView.AddSubview(_switchButton);
-            _switchButton.WidthAnchor.ConstraintEqualToConstant(38f).Active = true;
-            _switchButton.HeightAnchor.ConstraintEqualToConstant(21f).Active = true;
-            _switchButton.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor, 68f).Active = true;
-            _switchButton.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor, 30f).Active = true;
+            _switchButton.WidthAnchor.ConstraintEqualTo(38f).Active = true;
+            _switchButton.HeightAnchor.ConstraintEqualTo(21f).Active = true;
+            _switchButton.LeadingAnchor.ConstraintEqualTo(_optionView.LeadingAnchor, 68f).Active = true;
+            _switchButton.TopAnchor.ConstraintEqualTo(_optionView.TopAnchor, 30f).Active = true;
 
             string? buttonLabel = SwitchOption.ButtonLabel;
             // Temporarily use Label as a fallback; remove when no longer needed
@@ -91,8 +91,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
             _optionView.AddSubview(title);
 
-            title.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor, 121f).Active = true;
-            title.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor, 24f).Active = true;
+            title.LeadingAnchor.ConstraintEqualTo(_optionView.LeadingAnchor, 121f).Active = true;
+            title.TopAnchor.ConstraintEqualTo(_optionView.TopAnchor, 24f).Active = true;
 
             _progressIndicator = new NSProgressIndicator(new CoreGraphics.CGRect(0, 0, 18, 18));
             _progressIndicator.Style = NSProgressIndicatorStyle.Spinning;
@@ -101,8 +101,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             _progressIndicator.TranslatesAutoresizingMaskIntoConstraints = false;
             _optionView.AddSubview(_progressIndicator);
 
-            _progressIndicator.LeadingAnchor.ConstraintEqualToAnchor(title.TrailingAnchor, 6).Active = true;
-            _progressIndicator.TopAnchor.ConstraintEqualToAnchor(title.TopAnchor).Active = true;
+            _progressIndicator.LeadingAnchor.ConstraintEqualTo(title.TrailingAnchor, 6).Active = true;
+            _progressIndicator.TopAnchor.ConstraintEqualTo(title.TopAnchor).Active = true;
 
             string? descriptionText = Option.Description;
             if (descriptionText == null)
@@ -124,18 +124,18 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 description.LineBreakMode = NSLineBreakMode.ByWordWrapping;
                 _optionView.AddSubview(description);
 
-                description.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor, 121f).Active = true;
-                description.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor, 42f).Active = true;
+                description.LeadingAnchor.ConstraintEqualTo(_optionView.LeadingAnchor, 121f).Active = true;
+                description.TopAnchor.ConstraintEqualTo(_optionView.TopAnchor, 42f).Active = true;
 
                 var bestHeight = description.Cell.CellSizeForBounds(new CoreGraphics.CGRect(0, 0, 354, 600)).Height;
-                var _descriptionHeightConstraint = description.HeightAnchor.ConstraintEqualToConstant(bestHeight);
+                var _descriptionHeightConstraint = description.HeightAnchor.ConstraintEqualTo(bestHeight);
                 _descriptionHeightConstraint.Active = true;
-                var _descriptionWidthConstraint = description.WidthAnchor.ConstraintEqualToConstant(354f);
+                var _descriptionWidthConstraint = description.WidthAnchor.ConstraintEqualTo(354f);
                 _descriptionWidthConstraint.Active = true;
 
                 float bottomeSpace = -28;
                 if (bestHeight > 26) { bottomeSpace = -14; }
-                _descriptionBottomConstraints = description.BottomAnchor.ConstraintEqualToAnchor(_optionView.BottomAnchor, bottomeSpace);
+                _descriptionBottomConstraints = description.BottomAnchor.ConstraintEqualTo(_optionView.BottomAnchor, bottomeSpace);
                 _descriptionBottomConstraints.Active = true;
             }
 
@@ -149,16 +149,16 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 helpButton.TranslatesAutoresizingMaskIntoConstraints = false;
 
                 _optionView.AddSubview(helpButton);
-                var _helpButtonWidthConstraint = helpButton.WidthAnchor.ConstraintEqualToConstant(21f);
+                var _helpButtonWidthConstraint = helpButton.WidthAnchor.ConstraintEqualTo(21f);
                 _helpButtonWidthConstraint.Priority = (int)NSLayoutPriority.DefaultLow;
                 _helpButtonWidthConstraint.Active = true;
 
-                helpButton.TrailingAnchor.ConstraintEqualToAnchor(_optionView.TrailingAnchor, -6f).Active = true;
-                helpButton.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor, 30f).Active = true;
+                helpButton.TrailingAnchor.ConstraintEqualTo(_optionView.TrailingAnchor, -6f).Active = true;
+                helpButton.TopAnchor.ConstraintEqualTo(_optionView.TopAnchor, 30f).Active = true;
                 helpButton.Activated += (o, args) => ShowHintPopover(Option.Hint!, helpButton);
             }
 
-            var _optionViewWidthConstraint = _optionView.WidthAnchor.ConstraintEqualToConstant(600f);
+            var _optionViewWidthConstraint = _optionView.WidthAnchor.ConstraintEqualTo(600f);
             _optionViewWidthConstraint.Active = true;
 
         }

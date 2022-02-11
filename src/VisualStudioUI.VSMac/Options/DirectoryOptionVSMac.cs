@@ -78,15 +78,15 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                     };
 
                     _controlView.AddArrangedSubview(_button);
-                    _controlView.HeightAnchor.ConstraintEqualToConstant(21f).Active = true;
+                    _controlView.HeightAnchor.ConstraintEqualTo(21f).Active = true;
 
-                    _textField.WidthAnchor.ConstraintEqualToConstant(196f).Active = true;
-                    _textField.HeightAnchor.ConstraintEqualToConstant(21).Active = true;
-                    _textField.LeadingAnchor.ConstraintEqualToAnchor(_controlView.LeadingAnchor).Active = true;
-                    _textField.TopAnchor.ConstraintEqualToAnchor(_controlView.TopAnchor).Active = true;
-                    _button.WidthAnchor.ConstraintEqualToConstant(24f).Active = true;
-                    _button.HeightAnchor.ConstraintEqualToConstant(21).Active = true;
-                    _button.TrailingAnchor.ConstraintEqualToAnchor(_controlView.TrailingAnchor).Active = true;
+                    _textField.WidthAnchor.ConstraintEqualTo(196f).Active = true;
+                    _textField.HeightAnchor.ConstraintEqualTo(21).Active = true;
+                    _textField.LeadingAnchor.ConstraintEqualTo(_controlView.LeadingAnchor).Active = true;
+                    _textField.TopAnchor.ConstraintEqualTo(_controlView.TopAnchor).Active = true;
+                    _button.WidthAnchor.ConstraintEqualTo(24f).Active = true;
+                    _button.HeightAnchor.ConstraintEqualTo(21).Active = true;
+                    _button.TrailingAnchor.ConstraintEqualTo(_controlView.TrailingAnchor).Active = true;
                 }
                 return _controlView;
             }

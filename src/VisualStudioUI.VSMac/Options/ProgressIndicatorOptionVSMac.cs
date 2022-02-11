@@ -37,8 +37,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             _optionView.WantsLayer = true;
             _optionView.TranslatesAutoresizingMaskIntoConstraints = false;
 
-            _optionView.WidthAnchor.ConstraintEqualToConstant(600f).Active = true;
-            _optionView.HeightAnchor.ConstraintEqualToConstant(100f).Active = true;
+            _optionView.WidthAnchor.ConstraintEqualTo(600f).Active = true;
+            _optionView.HeightAnchor.ConstraintEqualTo(100f).Active = true;
 
             if (!string.IsNullOrEmpty(Option.Label))
             {
@@ -59,11 +59,11 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 };
 
                 _optionView.AddSubview(label);
-                label.WidthAnchor.ConstraintEqualToConstant(205f).Active = true;
-                label.HeightAnchor.ConstraintEqualToConstant(16f).Active = true;
+                label.WidthAnchor.ConstraintEqualTo(205f).Active = true;
+                label.HeightAnchor.ConstraintEqualTo(16f).Active = true;
 
-                label.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor, 6f).Active = true;
-                label.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor, 7f).Active = true;
+                label.LeadingAnchor.ConstraintEqualTo(_optionView.LeadingAnchor, 6f).Active = true;
+                label.TopAnchor.ConstraintEqualTo(_optionView.TopAnchor, 7f).Active = true;
             }
 
             _progressIndicator = new NSProgressIndicator(new CoreGraphics.CGRect(0, 0, 18, 18));
@@ -75,8 +75,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             _progressIndicator.SizeToFit();
             _optionView.AddSubview(_progressIndicator);
 
-            _progressIndicator.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor, 215f).Active = true;
-            _progressIndicator.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor, 5f).Active = true;
+            _progressIndicator.LeadingAnchor.ConstraintEqualTo(_optionView.LeadingAnchor, 215f).Active = true;
+            _progressIndicator.TopAnchor.ConstraintEqualTo(_optionView.TopAnchor, 5f).Active = true;
 
             // Default is start
             _progressIndicator.StartAnimation(null);
@@ -99,8 +99,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
             _optionView.AddSubview(_childrenControl);
 
-            _childrenControl.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor).Active = true;
-            _childrenControl.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor, _progressIndicator.FittingSize.Width).Active = true;
+            _childrenControl.TopAnchor.ConstraintEqualTo(_optionView.TopAnchor).Active = true;
+            _childrenControl.LeadingAnchor.ConstraintEqualTo(_optionView.LeadingAnchor, _progressIndicator.FittingSize.Width).Active = true;
         }
 
         public void SpinnerChanged(object sender, ViewModelPropertyChangedEventArgs e)

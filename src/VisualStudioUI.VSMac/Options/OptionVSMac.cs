@@ -59,7 +59,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 label.Font = NSFont.SystemFontOfSize(10f);
             }
             label.SizeToFit();
-            label.WidthAnchor.ConstraintGreaterThanOrEqualToConstant(213f).Active = true;
+            label.WidthAnchor.ConstraintGreaterThanOrEqualTo(213f).Active = true;
 
             return label;
         }
@@ -81,7 +81,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             description.TextColor = NSColor.SecondaryLabelColor;
             description.TranslatesAutoresizingMaskIntoConstraints = false;
 
-            description.WidthAnchor.ConstraintEqualToConstant(354f).Active = true;
+            description.WidthAnchor.ConstraintEqualTo(354f).Active = true;
 
             return description;
         }
@@ -128,8 +128,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 return null;
             }
 
-            hintButton.HeightAnchor.ConstraintEqualToConstant(20f).Active = true;
-            hintButton.WidthAnchor.ConstraintEqualToConstant(20f).Active = true;
+            hintButton.HeightAnchor.ConstraintEqualTo(20f).Active = true;
+            hintButton.WidthAnchor.ConstraintEqualTo(20f).Active = true;
 
             hintButton.Activated += (o, args) => ShowHintPopover(messageText!, hintButton);
 

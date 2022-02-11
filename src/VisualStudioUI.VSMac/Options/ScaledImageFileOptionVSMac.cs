@@ -34,7 +34,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                     _view.WantsLayer = true;
                     _view.TranslatesAutoresizingMaskIntoConstraints = false;
                     float viewWidth = (ImageOption.DrawSize + Space) * ImageOption.ImageArray.Value.Length;
-                    _view.WidthAnchor.ConstraintEqualToConstant(viewWidth).Active = true;
+                    _view.WidthAnchor.ConstraintEqualTo(viewWidth).Active = true;
 
                     foreach (var item in ImageOption.ImageArray.Value)
                     {
@@ -74,8 +74,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             var border= DrawEmptyLayer(imageView, imageFile);
 
             _frameView.AddArrangedSubview(imageView);
-            imageView.WidthAnchor.ConstraintEqualToConstant(ImageOption.DrawSize).Active = true;
-            imageView.HeightAnchor.ConstraintEqualToConstant(ImageOption.DrawSize).Active = true;
+            imageView.WidthAnchor.ConstraintEqualTo(ImageOption.DrawSize).Active = true;
+            imageView.HeightAnchor.ConstraintEqualTo(ImageOption.DrawSize).Active = true;
             if (!string.IsNullOrWhiteSpace(imageFile.Path) && File.Exists(imageFile.Path))
             {
                 var image = new NSImage(imageFile.Path ?? "");

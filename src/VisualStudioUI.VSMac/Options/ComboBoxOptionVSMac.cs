@@ -36,7 +36,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                     };
                     SetAccessibilityTitleToLabel(_popUpButton);
 
-                    _popUpButton.WidthAnchor.ConstraintEqualToConstant(198f).Active = true;
+                    _popUpButton.WidthAnchor.ConstraintEqualTo(198f).Active = true;
 
                     _popUpButton.Activated += UpdatePropertyFromUI;
 

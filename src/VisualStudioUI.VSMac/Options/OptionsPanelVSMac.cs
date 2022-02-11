@@ -22,17 +22,17 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             _scrollView.ContentView = clipView;
             clipView.TranslatesAutoresizingMaskIntoConstraints = false;
 
-            clipView.TopAnchor.ConstraintEqualToAnchor(_scrollView.TopAnchor).Active = true;
-            clipView.LeadingAnchor.ConstraintEqualToAnchor(_scrollView.LeadingAnchor).Active = true;
-            clipView.TrailingAnchor.ConstraintEqualToAnchor(_scrollView.TrailingAnchor).Active = true;
-            clipView.BottomAnchor.ConstraintEqualToAnchor(_scrollView.BottomAnchor).Active = true;
+            clipView.TopAnchor.ConstraintEqualTo(_scrollView.TopAnchor).Active = true;
+            clipView.LeadingAnchor.ConstraintEqualTo(_scrollView.LeadingAnchor).Active = true;
+            clipView.TrailingAnchor.ConstraintEqualTo(_scrollView.TrailingAnchor).Active = true;
+            clipView.BottomAnchor.ConstraintEqualTo(_scrollView.BottomAnchor).Active = true;
 
             var documentView = new NSStackView();
             documentView.TranslatesAutoresizingMaskIntoConstraints = false;
             _scrollView.DocumentView = documentView;
 
-            documentView.TopAnchor.ConstraintEqualToAnchor(clipView.TopAnchor).Active = true;
-            documentView.LeadingAnchor.ConstraintEqualToAnchor(clipView.LeadingAnchor).Active = true;
+            documentView.TopAnchor.ConstraintEqualTo(clipView.TopAnchor).Active = true;
+            documentView.LeadingAnchor.ConstraintEqualTo(clipView.LeadingAnchor).Active = true;
 
             documentView.EdgeInsets = new NSEdgeInsets(24f, 24f, 24f, 24f);
 

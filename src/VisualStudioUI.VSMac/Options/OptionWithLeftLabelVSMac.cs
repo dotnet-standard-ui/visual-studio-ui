@@ -35,7 +35,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
         {
             // View:     optionView
             _optionView = new NSView();
-            _optionView.WidthAnchor.ConstraintEqualToConstant(600f - IndentValue()).Active = true;
+            _optionView.WidthAnchor.ConstraintEqualTo(600f - IndentValue()).Active = true;
 
             _control = ControlView;
 
@@ -52,26 +52,26 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             {
                 _optionView.AddSubview(_label);
 
-                _label.TrailingAnchor.ConstraintEqualToAnchor(_control.LeadingAnchor, -8f).Active = true;
-                _label.CenterYAnchor.ConstraintEqualToAnchor(_control.CenterYAnchor).Active = true;
+                _label.TrailingAnchor.ConstraintEqualTo(_control.LeadingAnchor, -8f).Active = true;
+                _label.CenterYAnchor.ConstraintEqualTo(_control.CenterYAnchor).Active = true;
             }
 
             NSTextField? descriptionView = CreateDescriptionView();
             if (descriptionView != null)
             {
                 _optionView.AddSubview(descriptionView);
-                descriptionView.LeadingAnchor.ConstraintEqualToAnchor(_control.LeadingAnchor).Active = true;
-                descriptionView.TopAnchor.ConstraintEqualToAnchor(_control.BottomAnchor, 5f).Active = true;
-                descriptionView.BottomAnchor.ConstraintEqualToAnchor(_optionView.BottomAnchor,-5).Active = true;
+                descriptionView.LeadingAnchor.ConstraintEqualTo(_control.LeadingAnchor).Active = true;
+                descriptionView.TopAnchor.ConstraintEqualTo(_control.BottomAnchor, 5f).Active = true;
+                descriptionView.BottomAnchor.ConstraintEqualTo(_optionView.BottomAnchor,-5).Active = true;
             }
             else
             {
-                _control.BottomAnchor.ConstraintEqualToAnchor(_optionView.BottomAnchor, -5f).Active = true;
+                _control.BottomAnchor.ConstraintEqualTo(_optionView.BottomAnchor, -5f).Active = true;
             }
 
             float leftSpace = (Option.AllowSpaceForLabel||_label != null) ? 222f : 20f;
-            _control.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor, leftSpace + IndentValue()).Active = true;
-            _control.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor, 5f).Active = true;
+            _control.LeadingAnchor.ConstraintEqualTo(_optionView.LeadingAnchor, leftSpace + IndentValue()).Active = true;
+            _control.TopAnchor.ConstraintEqualTo(_optionView.TopAnchor, 5f).Active = true;
 
         }
 
@@ -98,8 +98,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
             _optionView!.AddSubview(_hintButton);
 
-            _hintButton.LeadingAnchor.ConstraintEqualToAnchor(_control!.TrailingAnchor, 10f).Active = true;
-            _hintButton.CenterYAnchor.ConstraintEqualToAnchor(_control!.CenterYAnchor).Active = true;
+            _hintButton.LeadingAnchor.ConstraintEqualTo(_control!.TrailingAnchor, 10f).Active = true;
+            _hintButton.CenterYAnchor.ConstraintEqualTo(_control!.CenterYAnchor).Active = true;
         }
     }
 }

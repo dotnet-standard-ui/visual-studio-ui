@@ -128,28 +128,28 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 left.TranslatesAutoresizingMaskIntoConstraints = false;
                 left.SizeToFit();
                 _optionView.AddSubview(left);
-                left.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor, IndentValue()).Active = true;
-                left.WidthAnchor.ConstraintEqualToConstant(205).Active = true;
-                left.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor, 10).Active = true;
+                left.LeadingAnchor.ConstraintEqualTo(_optionView.LeadingAnchor, IndentValue()).Active = true;
+                left.WidthAnchor.ConstraintEqualTo(205).Active = true;
+                left.TopAnchor.ConstraintEqualTo(_optionView.TopAnchor, 10).Active = true;
             }
 
-            _addButton.WidthAnchor.ConstraintEqualToConstant(30).Active = true;
-            _addButton.HeightAnchor.ConstraintEqualToConstant(25).Active = true;
-            _removeButton.WidthAnchor.ConstraintEqualToConstant(30).Active = true;
-            _removeButton.HeightAnchor.ConstraintEqualToConstant(25).Active = true;
-            scrolledView.HeightAnchor.ConstraintEqualToConstant(StringListOption.Height).Active = true;
-            scrolledView.WidthAnchor.ConstraintEqualToConstant(StringListOption.Width).Active = true;
-            _optionView.WidthAnchor.ConstraintEqualToConstant(640f).Active = true;
+            _addButton.WidthAnchor.ConstraintEqualTo(30).Active = true;
+            _addButton.HeightAnchor.ConstraintEqualTo(25).Active = true;
+            _removeButton.WidthAnchor.ConstraintEqualTo(30).Active = true;
+            _removeButton.HeightAnchor.ConstraintEqualTo(25).Active = true;
+            scrolledView.HeightAnchor.ConstraintEqualTo(StringListOption.Height).Active = true;
+            scrolledView.WidthAnchor.ConstraintEqualTo(StringListOption.Width).Active = true;
+            _optionView.WidthAnchor.ConstraintEqualTo(640f).Active = true;
 
-            _addButton.TopAnchor.ConstraintEqualToAnchor(scrolledView.BottomAnchor, 10).Active = true;
-            _addButton.LeadingAnchor.ConstraintEqualToAnchor(scrolledView.LeadingAnchor).Active = true;
-            _removeButton.TopAnchor.ConstraintEqualToAnchor(_addButton.TopAnchor).Active = true;
-            _removeButton.LeadingAnchor.ConstraintEqualToAnchor(_addButton.TrailingAnchor, 10).Active = true;
-            _optionView.BottomAnchor.ConstraintEqualToAnchor(_addButton.BottomAnchor, 2).Active = true;
-            scrolledView.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor, 10).Active = true;
+            _addButton.TopAnchor.ConstraintEqualTo(scrolledView.BottomAnchor, 10).Active = true;
+            _addButton.LeadingAnchor.ConstraintEqualTo(scrolledView.LeadingAnchor).Active = true;
+            _removeButton.TopAnchor.ConstraintEqualTo(_addButton.TopAnchor).Active = true;
+            _removeButton.LeadingAnchor.ConstraintEqualTo(_addButton.TrailingAnchor, 10).Active = true;
+            _optionView.BottomAnchor.ConstraintEqualTo(_addButton.BottomAnchor, 2).Active = true;
+            scrolledView.TopAnchor.ConstraintEqualTo(_optionView.TopAnchor, 10).Active = true;
 
             float leftSpace = Option.AllowSpaceForLabel ? 222f : 20f;
-            scrolledView.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor, leftSpace + IndentValue()).Active = true;
+            scrolledView.LeadingAnchor.ConstraintEqualTo(_optionView.LeadingAnchor, leftSpace + IndentValue()).Active = true;
 
             StringListOption.Model.PropertyChanged += OnStringsListChanged;
 

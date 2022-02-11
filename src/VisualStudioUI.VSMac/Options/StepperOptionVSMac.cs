@@ -85,14 +85,14 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                     _controlView.AddSubview(_textField);
                     _controlView.AddSubview(_stepper);
 
-                    _textField.WidthAnchor.ConstraintEqualToConstant(64f).Active = true;
-                    _textField.HeightAnchor.ConstraintEqualToConstant(21f).Active = true;
-                    _textField.LeadingAnchor.ConstraintEqualToAnchor(_controlView.LeadingAnchor).Active = true;
-                    _textField.TopAnchor.ConstraintEqualToAnchor(_controlView.TopAnchor).Active = true;
-                    _textField.BottomAnchor.ConstraintEqualToAnchor(_controlView.BottomAnchor).Active = true;
-                    _stepper.CenterYAnchor.ConstraintEqualToAnchor(_textField.CenterYAnchor).Active = true;
-                    _stepper.LeadingAnchor.ConstraintEqualToAnchor(_textField.TrailingAnchor, 10).Active = true;
-                    _controlView.TrailingAnchor.ConstraintEqualToAnchor(_stepper.TrailingAnchor,2).Active = true;
+                    _textField.WidthAnchor.ConstraintEqualTo(64f).Active = true;
+                    _textField.HeightAnchor.ConstraintEqualTo(21f).Active = true;
+                    _textField.LeadingAnchor.ConstraintEqualTo(_controlView.LeadingAnchor).Active = true;
+                    _textField.TopAnchor.ConstraintEqualTo(_controlView.TopAnchor).Active = true;
+                    _textField.BottomAnchor.ConstraintEqualTo(_controlView.BottomAnchor).Active = true;
+                    _stepper.CenterYAnchor.ConstraintEqualTo(_textField.CenterYAnchor).Active = true;
+                    _stepper.LeadingAnchor.ConstraintEqualTo(_textField.TrailingAnchor, 10).Active = true;
+                    _controlView.TrailingAnchor.ConstraintEqualTo(_stepper.TrailingAnchor,2).Active = true;
                 }
                 return _controlView;
             }

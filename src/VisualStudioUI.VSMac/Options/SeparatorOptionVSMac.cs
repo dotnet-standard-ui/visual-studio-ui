@@ -35,9 +35,9 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             separatorView.WantsLayer = true;
             separatorView.TranslatesAutoresizingMaskIntoConstraints = false;
 
-            var separatorViewWidthConstraint = separatorView.WidthAnchor.ConstraintEqualToConstant(600f);
+            var separatorViewWidthConstraint = separatorView.WidthAnchor.ConstraintEqualTo(600f);
             separatorViewWidthConstraint.Active = true;
-            var separatorViewHeightConstraint = separatorView.HeightAnchor.ConstraintEqualToConstant(31f);
+            var separatorViewHeightConstraint = separatorView.HeightAnchor.ConstraintEqualTo(31f);
             separatorViewHeightConstraint.Active = true;
 
             // View:     boxView
@@ -47,15 +47,15 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             boxView.TranslatesAutoresizingMaskIntoConstraints = false;
 
             separatorView.AddSubview(boxView);
-            var boxViewWidthConstraint = boxView.WidthAnchor.ConstraintEqualToConstant(600f);
+            var boxViewWidthConstraint = boxView.WidthAnchor.ConstraintEqualTo(600f);
             boxViewWidthConstraint.Priority = (int) NSLayoutPriority.DefaultLow;
             boxViewWidthConstraint.Active = true;
-            var boxViewHeightConstraint = boxView.HeightAnchor.ConstraintEqualToConstant(1f);
+            var boxViewHeightConstraint = boxView.HeightAnchor.ConstraintEqualTo(1f);
             boxViewHeightConstraint.Active = true;
 
-            boxView.TrailingAnchor.ConstraintEqualToAnchor(separatorView.TrailingAnchor, 0f).Active = true;
-            boxView.LeadingAnchor.ConstraintEqualToAnchor(separatorView.LeadingAnchor, 0f).Active = true;
-            boxView.TopAnchor.ConstraintEqualToAnchor(separatorView.CenterYAnchor, -0.5f).Active = true;
+            boxView.TrailingAnchor.ConstraintEqualTo(separatorView.TrailingAnchor, 0f).Active = true;
+            boxView.LeadingAnchor.ConstraintEqualTo(separatorView.LeadingAnchor, 0f).Active = true;
+            boxView.TopAnchor.ConstraintEqualTo(separatorView.CenterYAnchor, -0.5f).Active = true;
 
             return separatorView;
         }

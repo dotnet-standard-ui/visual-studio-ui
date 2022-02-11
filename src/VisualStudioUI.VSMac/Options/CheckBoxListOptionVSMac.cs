@@ -115,40 +115,40 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 left.TranslatesAutoresizingMaskIntoConstraints = false;
                 left.SizeToFit();
                 _optionView.AddSubview(left);
-                left.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor).Active = true;
-                left.WidthAnchor.ConstraintEqualToConstant(205).Active = true;
-                left.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor).Active = true;
+                left.LeadingAnchor.ConstraintEqualTo(_optionView.LeadingAnchor).Active = true;
+                left.WidthAnchor.ConstraintEqualTo(205).Active = true;
+                left.TopAnchor.ConstraintEqualTo(_optionView.TopAnchor).Active = true;
             }
 
             if (CheckBoxListOption.AllowReordering)
             {
                 if (_upButton.Title.Length > _downButton.Title.Length)
-                    _downButton.WidthAnchor.ConstraintEqualToAnchor(_upButton.WidthAnchor).Active = true;
+                    _downButton.WidthAnchor.ConstraintEqualTo(_upButton.WidthAnchor).Active = true;
                 else
-                    _upButton.WidthAnchor.ConstraintEqualToAnchor(_downButton.WidthAnchor).Active = true;
+                    _upButton.WidthAnchor.ConstraintEqualTo(_downButton.WidthAnchor).Active = true;
             }
 
-            _optionView.WidthAnchor.ConstraintEqualToConstant(640f - IndentValue()).Active = true;
+            _optionView.WidthAnchor.ConstraintEqualTo(640f - IndentValue()).Active = true;
 
-            scrolledView.HeightAnchor.ConstraintEqualToConstant(CheckBoxListOption.Height).Active = true;
-            scrolledView.WidthAnchor.ConstraintEqualToConstant(CheckBoxListOption.Width).Active = true;
+            scrolledView.HeightAnchor.ConstraintEqualTo(CheckBoxListOption.Height).Active = true;
+            scrolledView.WidthAnchor.ConstraintEqualTo(CheckBoxListOption.Width).Active = true;
 
             if (CheckBoxListOption.AllowReordering)
             {
-                _upButton.TopAnchor.ConstraintEqualToAnchor(scrolledView.BottomAnchor, 10).Active = true;
-                _upButton.LeadingAnchor.ConstraintEqualToAnchor(scrolledView.LeadingAnchor).Active = true;
-                _downButton.TopAnchor.ConstraintEqualToAnchor(_upButton.TopAnchor).Active = true;
-                _downButton.LeadingAnchor.ConstraintEqualToAnchor(_upButton.TrailingAnchor, 10).Active = true;
-                _optionView.BottomAnchor.ConstraintEqualToAnchor(_upButton.BottomAnchor, 2).Active = true;
+                _upButton.TopAnchor.ConstraintEqualTo(scrolledView.BottomAnchor, 10).Active = true;
+                _upButton.LeadingAnchor.ConstraintEqualTo(scrolledView.LeadingAnchor).Active = true;
+                _downButton.TopAnchor.ConstraintEqualTo(_upButton.TopAnchor).Active = true;
+                _downButton.LeadingAnchor.ConstraintEqualTo(_upButton.TrailingAnchor, 10).Active = true;
+                _optionView.BottomAnchor.ConstraintEqualTo(_upButton.BottomAnchor, 2).Active = true;
             }
 
-            scrolledView.TopAnchor.ConstraintEqualToAnchor(_optionView.TopAnchor).Active = true;
+            scrolledView.TopAnchor.ConstraintEqualTo(_optionView.TopAnchor).Active = true;
 
             float leftSpace = Option.AllowSpaceForLabel ? 222f:20f;
-            scrolledView.LeadingAnchor.ConstraintEqualToAnchor(_optionView.LeadingAnchor, leftSpace + IndentValue()).Active = true;
+            scrolledView.LeadingAnchor.ConstraintEqualTo(_optionView.LeadingAnchor, leftSpace + IndentValue()).Active = true;
             if (!CheckBoxListOption.AllowReordering)
             {
-                scrolledView.BottomAnchor.ConstraintEqualToAnchor(_optionView.BottomAnchor).Active = true;
+                scrolledView.BottomAnchor.ConstraintEqualTo(_optionView.BottomAnchor).Active = true;
             }
 
             CheckBoxListOption.Property.PropertyChanged += OnCheckBoxListChanged;
