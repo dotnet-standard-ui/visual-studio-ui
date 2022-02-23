@@ -48,7 +48,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
                     property.PropertyChanged += delegate
                     {
-                        _textField.StringValue = TextOption.Property.Value;
+                        _textField.StringValue = TextOption.Property.Value ?? string.Empty;
                     };
 
                     _textField.Changed += delegate { property.Value = _textField.StringValue; };
