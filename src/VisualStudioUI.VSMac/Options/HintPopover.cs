@@ -100,8 +100,8 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
         // This is invoked from the `Copy (NSZone)` method. ObjC sometimes clones the native NSTextFieldCell so we need to be able
         // to create a new managed wrapper for it.
-        protected VerticallyCenteredTextFieldCell(IntPtr ptr)
-            : base(ptr)
+        protected VerticallyCenteredTextFieldCell(NativeHandle handle)
+            : base(handle)
         {
         }
 
