@@ -96,22 +96,15 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             };
 
             _optionView.AddSubview(scrolledView);
-            _addButton = new NSButton
-            {
-                BezelStyle = NSBezelStyle.RoundRect,
-                Title = KeyValueTableEntryOption.AddButtonTitle,
-                ToolTip = KeyValueTableEntryOption.AddToolTip,
-                TranslatesAutoresizingMaskIntoConstraints = false
-            };
+            _addButton = new BarTextButton();
+            _addButton.Title = KeyValueTableEntryOption.AddButtonTitle;
+            _addButton.ToolTip = KeyValueTableEntryOption.AddToolTip;
             _addButton.SizeToFit();
             _addButton.Activated += OnAddClicked;
-            _removeButton = new NSButton
-            {
-                BezelStyle = NSBezelStyle.RoundRect,
-                Title = KeyValueTableEntryOption.RemoveButtonTitle,
-                ToolTip = KeyValueTableEntryOption.RemoveToolTip,
-                TranslatesAutoresizingMaskIntoConstraints = false
-            };
+
+            _removeButton = new BarTextButton();
+            _removeButton.Title = KeyValueTableEntryOption.RemoveButtonTitle;
+            _removeButton.ToolTip = KeyValueTableEntryOption.RemoveToolTip;
             _removeButton.SizeToFit();
             _removeButton.Activated += OnRemoveClicked;
             _optionView.AddSubview(_addButton);

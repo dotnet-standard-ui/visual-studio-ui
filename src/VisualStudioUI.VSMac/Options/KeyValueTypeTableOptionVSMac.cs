@@ -104,33 +104,21 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             };
 
             _optionView.AddSubview(scrolledView);
-            _addButton = new NSButton
-            {
-                BezelStyle = NSBezelStyle.RoundRect,
-                Title = KeyValueTypeTableOption.AddButtonTitle,
-                ToolTip = KeyValueTypeTableOption.AddToolTip,
-                TranslatesAutoresizingMaskIntoConstraints = false
-            };
+            _addButton = new BarTextButton();
+            _addButton.Title = KeyValueTypeTableOption.AddButtonTitle;
+            _addButton.ToolTip = KeyValueTypeTableOption.AddToolTip;
             _addButton.SizeToFit();
             _addButton.Activated += OnAddClicked;
 
-            _removeButton = new NSButton
-            {
-                BezelStyle = NSBezelStyle.RoundRect,
-                Title = KeyValueTypeTableOption.RemoveButtonTitle,
-                ToolTip = KeyValueTypeTableOption.RemoveToolTip,
-                TranslatesAutoresizingMaskIntoConstraints = false
-            };
+            _removeButton = new BarTextButton();
+            _removeButton.Title = KeyValueTypeTableOption.RemoveButtonTitle;
+            _removeButton.ToolTip = KeyValueTypeTableOption.RemoveToolTip;
             _removeButton.SizeToFit();
             _removeButton.Activated += OnRemoveClicked;
 
-            _editButton = new NSButton
-            {
-                BezelStyle = NSBezelStyle.RoundRect,
-                Title = KeyValueTypeTableOption.EditButtonTitle,
-                ToolTip = KeyValueTypeTableOption.EditToolTip,
-                TranslatesAutoresizingMaskIntoConstraints = false
-            };
+            _editButton = new BarTextButton();
+            _editButton.Title = KeyValueTypeTableOption.EditButtonTitle;
+            _editButton.ToolTip = KeyValueTypeTableOption.EditToolTip;
             _editButton.SizeToFit();
             _editButton.Activated += OnEditClicked;
 
