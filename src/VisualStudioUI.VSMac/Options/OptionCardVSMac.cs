@@ -33,18 +33,6 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 TranslatesAutoresizingMaskIntoConstraints = false
             };
 
-            var cardWidthConstraint = cardView.WidthAnchor.ConstraintEqualTo(640f);
-            cardWidthConstraint.Active = true;
-            //var cardHeightConstraint = cardView.HeightAnchor.ConstraintEqualTo (367f);
-            //cardHeightConstraint.Active = true;
-
-            /*
-            cardView.TrailingAnchor.ConstraintEqualTo (this.TrailingAnchor, 0f).Active = true;
-            cardView.LeadingAnchor.ConstraintEqualTo (this.LeadingAnchor, 0f).Active = true;
-            cardView.BottomAnchor.ConstraintEqualTo (this.BottomAnchor, 0f).Active = true;
-            cardView.TopAnchor.ConstraintEqualTo (this.TopAnchor, 0f).Active = true;
-            */
-
             // View:     background
             var background = new NSBox();
             background.BoxType = NSBoxType.NSBoxCustom;
@@ -56,14 +44,6 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             background.TranslatesAutoresizingMaskIntoConstraints = false;
 
             cardView.AddSubview(background);
-            /*
-            var backgroundWidthConstraint = background.WidthAnchor.ConstraintEqualTo (640f);
-            backgroundWidthConstraint.Priority = (System.Int32)NSLayoutPriority.DefaultLow;
-            backgroundWidthConstraint.Active = true;
-            var backgroundHeightConstraint = background.HeightAnchor.ConstraintEqualTo (367f);
-            backgroundHeightConstraint.Priority = (System.Int32)NSLayoutPriority.DefaultLow;
-            backgroundHeightConstraint.Active = true;
-            */
 
             background.TrailingAnchor.ConstraintEqualTo(cardView.TrailingAnchor, 0f).Active = true;
             background.LeadingAnchor.ConstraintEqualTo(cardView.LeadingAnchor, 0f).Active = true;

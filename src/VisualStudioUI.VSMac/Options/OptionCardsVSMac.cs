@@ -33,6 +33,12 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             cardsStack.Orientation = NSUserInterfaceLayoutOrientation.Vertical;
             cardsStack.Distribution = NSStackViewDistribution.Fill;
 
+            NSLayoutConstraint widthConstraint;
+            if (OptionCards.UseFixedWidth)
+                widthConstraint = cardsStack.WidthAnchor.ConstraintEqualTo(680f);
+            else widthConstraint = cardsStack.WidthAnchor.ConstraintGreaterThanOrEqualTo(680f);
+            widthConstraint.Active = true;
+
             foreach (OptionCard card in OptionCards.Cards)
             {
                 NSView cardView = ((OptionCardVSMac) card.Platform).View;
