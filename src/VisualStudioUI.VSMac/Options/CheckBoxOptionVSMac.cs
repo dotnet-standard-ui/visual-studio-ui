@@ -8,7 +8,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 {
     public class CheckBoxOptionVSMac : OptionWithLeftLabelVSMac
     {
-        private NSButton? _button;
+        private MultilineButton? _button;
 
         public CheckBoxOptionVSMac(CheckBoxOption option) : base(option)
         {
@@ -24,27 +24,19 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 {
                     ViewModelProperty<bool> property = CheckBoxOption.Property;
 
-                    _button = NSButton.CreateCheckbox(CheckBoxOption.ButtonLabel, CheckBoxSelected);
-                    _button.SetButtonType(NSButtonType.Radio);
-                    _button.ControlSize = NSControlSize.Regular;
+                    _button = new MultilineButton();
+                    _button.SetButtonType(NSButtonType.Switch);
+                    _button.primaryControl.Activated += (o, args) => CheckBoxSelected();
+
+                    _button.primaryControl.ControlSize = NSControlSize.Regular;
                     _button.Title = CheckBoxOption.ButtonLabel;
-                    _button.TranslatesAutoresizingMaskIntoConstraints = false;
-                    _button.State = CheckBoxOption.Property.Value ? NSCellStateValue.On : NSCellStateValue.Off;
-                    _button.LineBreakMode = NSLineBreakMode.TruncatingTail;
-                    if (_button.Title.Length > 97)
-                    {
-                        _button.Font = NSFont.SystemFontOfSize(10);
-                    }
-                    else if (_button.Title.Length > 80)
-                    {
-                        _button.Font = NSFont.SystemFontOfSize(NSFont.SmallSystemFontSize);
-                    } else
-                    {
-                        _button.Font = NSFont.SystemFontOfSize(NSFont.SystemFontSize);
-                    }
+                    _button.primaryControl.AccessibilityTitle = CheckBoxOption.ButtonLabel;
+                    _button.primaryControl.State = CheckBoxOption.Property.Value ? NSCellStateValue.On : NSCellStateValue.Off;
+                    _button.secondaryLabel.WidthAnchor.ConstraintLessThanOrEqualTo(500f).Active = true;
+
                     property.PropertyChanged += delegate
                     {
-                        _button.State = CheckBoxOption.Property.Value ? NSCellStateValue.On : NSCellStateValue.Off;
+                        _button.primaryControl.State = CheckBoxOption.Property.Value ? NSCellStateValue.On : NSCellStateValue.Off;
                     };
                 }
 
@@ -62,7 +54,7 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
 
         private void CheckBoxSelected()
         {
-            CheckBoxOption.Property.Value = (_button?.State == NSCellStateValue.On) ? true : false;
+            CheckBoxOption.Property.Value = (_button?.primaryControl.State == NSCellStateValue.On) ? true : false;
         }
     }
 }
