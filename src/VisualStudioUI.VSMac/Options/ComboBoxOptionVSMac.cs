@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Immutable;
 using AppKit;
+using Foundation;
 using Microsoft.VisualStudioUI.Options;
 using Microsoft.VisualStudioUI.Options.Models;
 
@@ -112,9 +113,10 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
             groupMenu.AutoEnablesItems = false;
             bool hasIndentate = false;
 
+            ItemIsBoldFunc<TItem>? itemIsBoldFunc = ComboBoxOption.ItemIsBoldFunc;
             foreach (var item in ComboBoxOption.ItemsProperty.Value)
             {
-                string itemDisplayString = ComboBoxOption.ItemDisplayStringFunc(item);
+                string itemDisplayString = ComboBoxOption.ItemDisplayStringFunc(item).Trim();
 
                 if (ComboBoxOption.IsSeperator(itemDisplayString))
                 {
@@ -138,6 +140,11 @@ namespace Microsoft.VisualStudioUI.VSMac.Options
                 }
 
                 menuItem.Title = itemDisplayString;
+                if (itemIsBoldFunc != null && itemIsBoldFunc(item))
+                {
+                    NSAttributedString attr = new NSAttributedString(menuItem.Title, font: NSFont.BoldSystemFontOfSize(NSFont.SystemFontSize));
+                    menuItem.AttributedTitle = attr;
+                }
 
                 groupMenu.AddItem(menuItem);
             }

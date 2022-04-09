@@ -3,6 +3,7 @@ using System.Collections.Immutable;
 namespace Microsoft.VisualStudioUI.Options.Models
 {
     public delegate string ItemDisplayStringFunc<in TItem>(TItem? item) where TItem : class;
+    public delegate bool ItemIsBoldFunc<in TItem>(TItem? item) where TItem : class;
 
     public static class DisplayableItemsUtil
     {

@@ -355,6 +355,7 @@ namespace Microsoft.VisualStudioUI.StandaloneApp
                     Hint = "This is the hint for the combo box"
                 }
             );
+
             card.AddOption(
                 new EditableComboBoxOption(StringProp("option1"), StringArrayProp(new[] { "option1", "option2", "option3" }))
                 {
@@ -362,6 +363,8 @@ namespace Microsoft.VisualStudioUI.StandaloneApp
                     Hint = "This is the hint for the editable combo box"
                 }
             );
+
+
 
             TextOption fileEntry = new TextOption(StringProp(""))
             {
@@ -374,7 +377,8 @@ namespace Microsoft.VisualStudioUI.StandaloneApp
             card.AddOption(fileEntry);
 
             ViewModelProperty<ImmutableArray<string>> propertyItems = new ViewModelProperty<ImmutableArray<string>>("");
-            var subMenuCombox = new ComboBoxOption<string>(StringProp("option1"), propertyItems)
+            var subMenuCombox = new ComboBoxOption<string>(StringProp("option1"), propertyItems,
+                itemIsBoldFunc: (item) => item.Equals("option2", System.StringComparison.OrdinalIgnoreCase))
             {
                 Label = "Sub Menu",
                 HasMultipleLevelMenu = true,
@@ -432,5 +436,13 @@ namespace Microsoft.VisualStudioUI.StandaloneApp
 
         public static ViewModelProperty<ImmutableArray<string>> ListProp(ImmutableArray<string> defaultValue) =>
             new ViewModelProperty<ImmutableArray<string>>("listProp", defaultValue);
+
+        // TODO: Later show an example using this, with the ItemDisplayStringFunc and ItemIsBoldFunc callbacks
+        // used to map to what's displayed
+        public class FancyComboBoxItem
+        {
+            public bool IsHeader { get; set; }
+            public string Label { get; set; }
+        }
     }
 }
