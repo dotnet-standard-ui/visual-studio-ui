@@ -6,8 +6,9 @@
         xmlns:overview="clr-namespace:Overview"
         xmlns:vsui="clr-namespace:Microsoft.VisualStudioUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <StackPanel Orientation="Vertical">
+        Background="#1f1f1f"
+        Title="MainWindow" Height="1000" Width="1200">
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="24">
         <overview:OverviewSample/>
     </StackPanel>
 </Window>

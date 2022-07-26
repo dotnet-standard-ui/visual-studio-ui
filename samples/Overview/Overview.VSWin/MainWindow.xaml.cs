@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.VisualStudioUI.VSWin;
 
 namespace Overview.VSWin
 {
@@ -22,6 +23,7 @@ namespace Overview.VSWin
     {
         public MainWindow()
         {
+            VisualStudioUILibrary.Initialize();
             InitializeComponent();
         }
     }
