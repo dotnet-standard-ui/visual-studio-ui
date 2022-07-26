@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4DB5EE52-D3CB-4567-ADB4-33D258609811}</ProjectGuid>
+    <ProjectGuid>{DD2253A0-A40F-4F22-99C6-42BD0319E655}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Welcome.VSWin</RootNamespace>
-    <AssemblyName>Welcome.VSWin</AssemblyName>
+    <RootNamespace>Overview.VSWin</RootNamespace>
+    <AssemblyName>Overview.VSWin</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -115,9 +115,9 @@
       <Project>{EAE5A81D-E394-4612-BA26-A43493D26B0B}</Project>
       <Name>Microsoft.VisualStudioUI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Welcome\Welcome.csproj">
-      <Project>{056FF6B7-3E44-4369-B53A-C2EA4283CE04}</Project>
-      <Name>Welcome</Name>
+    <ProjectReference Include="..\Overview\Overview.csproj">
+      <Project>{6d7f418b-046d-4687-a090-3925f3cb2663}</Project>
+      <Name>Overview</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

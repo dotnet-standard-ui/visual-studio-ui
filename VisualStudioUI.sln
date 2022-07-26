@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "external", "external", "{A5D59C9F-494B-43DB-8819-905A97C0352F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StandardUI", "external\standard-ui\src\Microsoft.StandardUI\Microsoft.StandardUI.csproj", "{0A88D3AC-D509-4D31-8198-5704AE311020}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.StandardUI", "external\standard-ui\src\Microsoft.StandardUI\Microsoft.StandardUI.csproj", "{0A88D3AC-D509-4D31-8198-5704AE311020}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudioUI.VSWin", "src\Microsoft.VisualStudioUI.VSWin\Microsoft.VisualStudioUI.VSWin.csproj", "{FF20BDB8-D3F4-488F-841F-35C7BEA926CE}"
 EndProject
@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{5707
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Welcome.VSWin", "samples\Welcome\Welcome.VSWin\Welcome.VSWin.csproj", "{4DB5EE52-D3CB-4567-ADB4-33D258609811}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StandardUI.Wpf", "external\standard-ui\src\Microsoft.StandardUI.Wpf\Microsoft.StandardUI.Wpf.csproj", "{5FFFCEFD-604F-4F2F-82F7-6E9163C3AD70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.StandardUI.Wpf", "external\standard-ui\src\Microsoft.StandardUI.Wpf\Microsoft.StandardUI.Wpf.csproj", "{5FFFCEFD-604F-4F2F-82F7-6E9163C3AD70}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Welcome", "Welcome", "{5F135D2B-3BFD-48E5-BA9A-A0BD54730DF9}"
 EndProject
@@ -23,11 +23,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Welcome", "samples\Welcome\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.ComponentModelEx", "external\standard-ui\external\component-model-ex\src\Microsoft.ComponentModelEx\Microsoft.ComponentModelEx.csproj", "{02B78AE5-C656-44FA-AD19-033A5B2C3E67}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StandardUI.SourceGenerator", "external\standard-ui\src\Microsoft.StandardUI.SourceGenerator\Microsoft.StandardUI.SourceGenerator.csproj", "{64944921-CA9D-47A3-B058-F683FE31069E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.StandardUI.SourceGenerator", "external\standard-ui\src\Microsoft.StandardUI.SourceGenerator\Microsoft.StandardUI.SourceGenerator.csproj", "{64944921-CA9D-47A3-B058-F683FE31069E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GalleryExtension", "GalleryExtension", "{B9C15130-D082-4BCF-A35B-1B353EB8C942}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.VisualStudioUIGallery.VSWin", "samples\GalleryExtension\Microsoft.VisualStudioUIGallery.VSWin\Microsoft.VisualStudioUIGallery.VSWin.csproj", "{14787172-ABBF-42E1-8EBC-3C6FAE15857C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Overview", "Overview", "{C70F5395-AA55-45FD-94EC-8B6442ADC651}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Overview.VSWin", "samples\Overview\Overview.VSWin\Overview.VSWin.csproj", "{DD2253A0-A40F-4F22-99C6-42BD0319E655}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Overview", "samples\Overview\Overview\Overview.csproj", "{6D7F418B-046D-4687-A090-3925F3CB2663}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,6 +115,22 @@ Global
 		{14787172-ABBF-42E1-8EBC-3C6FAE15857C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{14787172-ABBF-42E1-8EBC-3C6FAE15857C}.Release|x86.ActiveCfg = Release|x86
 		{14787172-ABBF-42E1-8EBC-3C6FAE15857C}.Release|x86.Build.0 = Release|x86
+		{DD2253A0-A40F-4F22-99C6-42BD0319E655}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD2253A0-A40F-4F22-99C6-42BD0319E655}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD2253A0-A40F-4F22-99C6-42BD0319E655}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DD2253A0-A40F-4F22-99C6-42BD0319E655}.Debug|x86.Build.0 = Debug|Any CPU
+		{DD2253A0-A40F-4F22-99C6-42BD0319E655}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD2253A0-A40F-4F22-99C6-42BD0319E655}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD2253A0-A40F-4F22-99C6-42BD0319E655}.Release|x86.ActiveCfg = Release|Any CPU
+		{DD2253A0-A40F-4F22-99C6-42BD0319E655}.Release|x86.Build.0 = Release|Any CPU
+		{6D7F418B-046D-4687-A090-3925F3CB2663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D7F418B-046D-4687-A090-3925F3CB2663}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D7F418B-046D-4687-A090-3925F3CB2663}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6D7F418B-046D-4687-A090-3925F3CB2663}.Debug|x86.Build.0 = Debug|Any CPU
+		{6D7F418B-046D-4687-A090-3925F3CB2663}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D7F418B-046D-4687-A090-3925F3CB2663}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D7F418B-046D-4687-A090-3925F3CB2663}.Release|x86.ActiveCfg = Release|Any CPU
+		{6D7F418B-046D-4687-A090-3925F3CB2663}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +145,9 @@ Global
 		{64944921-CA9D-47A3-B058-F683FE31069E} = {A5D59C9F-494B-43DB-8819-905A97C0352F}
 		{B9C15130-D082-4BCF-A35B-1B353EB8C942} = {57079638-494A-4876-9B3E-7329176AD4FD}
 		{14787172-ABBF-42E1-8EBC-3C6FAE15857C} = {B9C15130-D082-4BCF-A35B-1B353EB8C942}
+		{C70F5395-AA55-45FD-94EC-8B6442ADC651} = {57079638-494A-4876-9B3E-7329176AD4FD}
+		{DD2253A0-A40F-4F22-99C6-42BD0319E655} = {C70F5395-AA55-45FD-94EC-8B6442ADC651}
+		{6D7F418B-046D-4687-A090-3925F3CB2663} = {C70F5395-AA55-45FD-94EC-8B6442ADC651}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {791A006A-4E3E-4B11-9C92-0BCE6FE04DB9}

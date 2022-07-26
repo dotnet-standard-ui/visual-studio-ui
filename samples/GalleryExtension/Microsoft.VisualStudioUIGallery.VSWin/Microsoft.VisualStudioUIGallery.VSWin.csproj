@@ -26,7 +26,6 @@
     <StartAction>Program</StartAction>
     <StartProgram Condition="'$(DevEnvDir)' != ''">$(DevEnvDir)devenv.exe</StartProgram>
     <StartArguments>/rootsuffix Exp</StartArguments>
-
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\..\src\Microsoft.VisualStudioUI.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
@@ -95,11 +94,11 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\external\standard-ui\src\Microsoft.StandardUI.Wpf\Microsoft.StandardUI.Wpf.csproj">
       <Project>{5fffcefd-604f-4f2f-82f7-6e9163c3ad70}</Project>
-      <Name>StandardUI.Wpf</Name>
+      <Name>Microsoft.StandardUI.Wpf</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\external\standard-ui\src\Microsoft.StandardUI\Microsoft.StandardUI.csproj">
       <Project>{0A88D3AC-D509-4D31-8198-5704AE311020}</Project>
-      <Name>StandardUI</Name>
+      <Name>Microsoft.StandardUI</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\src\Microsoft.VisualStudioUI.VSWin\Microsoft.VisualStudioUI.VSWin.csproj">
       <Project>{ff20bdb8-d3f4-488f-841f-35c7bea926ce}</Project>
