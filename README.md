@@ -53,8 +53,8 @@ namespace NameSpace
 }
 ```
 4. Fill in the UI code. Here are some resources and examples:
-    - [OverviewSample]("visual-studio-ui/samples/Overview/Overview/OverviewSample.cs")
-    - [VisualStudioUIGallery]("visual-studio-ui/samples/GalleryExtension/Microsoft.VisualStudioUIGallery.VSWin")
+    - [OverviewSample]("/samples/Overview/Overview/OverviewSample.cs")
+    - [VisualStudioUIGallery]("/samples/GalleryExtension/Microsoft.VisualStudioUIGallery.VSWin")
 
 
 5. Once it is built, the UI will be available to be used as controls inside either Windows or Mac.
